@@ -295,7 +295,7 @@ export default function Philosophy() {
           <Quote $isVisible={isVisible}>
             The best consultants make themselves <strong>unnecessary</strong>.
             <AccentLine>
-              I build systems and teams that don't need me.
+              I build systems and teams that don&apos;t need me.
             </AccentLine>
           </Quote>
         </QuoteWrapper>

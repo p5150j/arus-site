@@ -237,7 +237,7 @@ export default function ProblemSection() {
     { 
       title: "Partnered with Startups", 
       result: "Great demos", 
-      outcome: "Couldn't scale",
+      outcome: "Couldn&apos;t scale",
       icon: "🚀"
     }
   ];

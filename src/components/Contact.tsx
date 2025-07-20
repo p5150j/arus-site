@@ -449,13 +449,13 @@ export default function Contact() {
         <ContentGrid>
           <TextContent>
             <Title>
-              <span>Let's Build</span> <br />
+              <span>Let&apos;s Build</span> <br />
               <span>Something Extraordinary</span>
             </Title>
             
             <Description>
               Ready to transform your technical challenges into competitive advantages? 
-              Let's discuss how surgical execution can accelerate your portfolio.
+              Let&apos;s discuss how surgical execution can accelerate your portfolio.
             </Description>
             
             <ContactInfo>
