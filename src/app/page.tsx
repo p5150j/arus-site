@@ -9,6 +9,7 @@ import ProblemSection from '@/components/ProblemSection';
 import ServicesSection from '@/components/ServicesSection';
 import CaseStudies from '@/components/CaseStudies';
 import EngagementModels from '@/components/EngagementModels';
+import GlobalPresence from '@/components/GlobalPresence';
 import Philosophy from '@/components/Philosophy';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -198,10 +199,14 @@ export default function Home() {
       </SectionTransition>
       
       <SectionTransition $index={5}>
-        <Philosophy />
+        <GlobalPresence />
       </SectionTransition>
       
       <SectionTransition $index={6}>
+        <Philosophy />
+      </SectionTransition>
+      
+      <SectionTransition $index={7}>
         <Contact />
       </SectionTransition>
       

@@ -244,7 +244,8 @@ export default function Navigation() {
     { href: '#problem', label: 'challenge', number: '01' },
     { href: '#services', label: 'approach', number: '02' },
     { href: '#cases', label: 'work', number: '03' },
-    { href: '#contact', label: 'connect', number: '04' }
+    { href: '#global-presence', label: 'global', number: '04' },
+    { href: '#contact', label: 'connect', number: '05' }
   ];
 
   return (
