@@ -1,12 +1,17 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
 
 // Dynamic import to avoid SSR issues with Three.js
-const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
+const Globe = dynamic(() => import('react-globe.gl'), { 
+  ssr: false,
+  loading: () => <div style={{ color: 'white' }}>Loading globe...</div>
+});
 
 const fadeIn = keyframes`
   from {
@@ -16,17 +21,6 @@ const fadeIn = keyframes`
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-`;
-
-const pulse = keyframes`
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.4;
   }
 `;
 
@@ -157,29 +151,29 @@ const GlobeWrapper = styled.div`
   justify-content: center;
 `;
 
+// 2025 Travel locations with coordinates
+const locations = [
+  { city: "Manila", country: "Philippines", lat: 14.5995, lng: 120.9842, date: "Jan 2025" },
+  { city: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, date: "Feb 2025" },
+  { city: "Berlin", country: "Germany", lat: 52.5200, lng: 13.4050, date: "Mar 2025" },
+  { city: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041, date: "Apr 2025" },
+  { city: "Los Angeles", country: "USA", lat: 34.0522, lng: -118.2437, date: "May 2025" },
+  { city: "Ho Chi Minh City", country: "Vietnam", lat: 10.8231, lng: 106.6297, date: "Jun 2025" },
+  { city: "Singapore", country: "Singapore", lat: 1.3521, lng: 103.8198, date: "Jul 2025" },
+  { city: "New York", country: "USA", lat: 40.7128, lng: -74.0060, date: "Aug 2025" },
+  { city: "Denver", country: "USA", lat: 39.7392, lng: -104.9903, date: "Sep 2025" },
+];
+
 export default function GlobalPresence() {
-  const globeEl = useRef<any>();
+  const globeEl = useRef<any>(null);
   const [arcsData, setArcsData] = useState<any[]>([]);
   const [mounted, setMounted] = useState(false);
-
-  // 2025 Travel locations with coordinates
-  const locations = [
-    { city: "Manila", country: "Philippines", lat: 14.5995, lng: 120.9842, date: "Jan 2025" },
-    { city: "Melbourne", country: "Australia", lat: -37.8136, lng: 144.9631, date: "Feb 2025" },
-    { city: "Berlin", country: "Germany", lat: 52.5200, lng: 13.4050, date: "Mar 2025" },
-    { city: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041, date: "Apr 2025" },
-    { city: "Los Angeles", country: "USA", lat: 34.0522, lng: -118.2437, date: "May 2025" },
-    { city: "Ho Chi Minh City", country: "Vietnam", lat: 10.8231, lng: 106.6297, date: "Jun 2025" },
-    { city: "Singapore", country: "Singapore", lat: 1.3521, lng: 103.8198, date: "Jul 2025" },
-    { city: "New York", country: "USA", lat: 40.7128, lng: -74.0060, date: "Aug 2025" },
-    { city: "Denver", country: "USA", lat: 39.7392, lng: -104.9903, date: "Sep 2025" },
-  ];
 
   useEffect(() => {
     setMounted(true);
     
     // Create arcs between consecutive locations
-    const arcs = [];
+    const arcs: any[] = [];
     for (let i = 0; i < locations.length - 1; i++) {
       arcs.push({
         startLat: locations[i].lat,
@@ -192,7 +186,7 @@ export default function GlobalPresence() {
     setArcsData(arcs);
 
     // Auto-rotate globe
-    if (globeEl.current) {
+    if (globeEl.current && globeEl.current.controls) {
       globeEl.current.controls().autoRotate = true;
       globeEl.current.controls().autoRotateSpeed = 0.5;
     }
