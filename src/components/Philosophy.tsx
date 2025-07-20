@@ -289,8 +289,8 @@ export default function Philosophy() {
       
       <Container>
         <QuoteWrapper $isVisible={isVisible}>
-          <QuoteMark $position="left" $isVisible={isVisible}>"</QuoteMark>
-          <QuoteMark $position="right" $isVisible={isVisible}>"</QuoteMark>
+          <QuoteMark $position="left" $isVisible={isVisible}>&ldquo;</QuoteMark>
+          <QuoteMark $position="right" $isVisible={isVisible}>&rdquo;</QuoteMark>
           
           <Quote $isVisible={isVisible}>
             The best consultants make themselves <strong>unnecessary</strong>.

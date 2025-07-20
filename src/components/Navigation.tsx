@@ -2,20 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '@/styles/theme';
 import { smoothScrollTo } from '@/utils/smoothScroll';
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const Nav = styled.nav<{ $scrolled: boolean }>`
   position: fixed;

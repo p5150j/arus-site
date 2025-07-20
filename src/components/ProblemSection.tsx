@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
 
