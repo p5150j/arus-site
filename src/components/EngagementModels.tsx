@@ -202,8 +202,8 @@ export default function EngagementModels() {
   const models = [
     { 
       title: "Venture Partner", 
-      price: "$75-150K", 
-      details: "Monthly + carry",
+      price: "$100-200K", 
+      details: "Monthly + 2-5% carry",
       icon: "⚡",
       features: [
         "Full technical leadership",
@@ -214,7 +214,7 @@ export default function EngagementModels() {
     },
     { 
       title: "Project Rescue", 
-      price: "$200-500K", 
+      price: "$300-750K", 
       details: "Fixed engagement",
       icon: "🚀",
       features: [
@@ -226,7 +226,7 @@ export default function EngagementModels() {
     },
     { 
       title: "Technical Advisory", 
-      price: "$40K", 
+      price: "$50-75K", 
       details: "Monthly retainer",
       icon: "💡",
       features: [
@@ -238,7 +238,7 @@ export default function EngagementModels() {
     },
     { 
       title: "On-Demand Expertise", 
-      price: "$350/hr", 
+      price: "$500-750/hr", 
       details: "Immediate access",
       icon: "🎯",
       features: [
