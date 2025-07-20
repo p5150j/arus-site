@@ -333,7 +333,7 @@ export default function ServicesSection() {
         <SectionIntro>
           <Title>A Different Approach</Title>
           <Subtitle>
-            Twenty years shipping production code. Zero PowerPoints delivered.
+            Twenty years shipping production code. Zero bullshit delivered.
           </Subtitle>
         </SectionIntro>
 
