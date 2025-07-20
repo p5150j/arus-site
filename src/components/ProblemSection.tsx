@@ -70,6 +70,13 @@ const Subtitle = styled.p`
   margin: 0 auto;
 `;
 
+const AccentUnderline = styled.span`
+  text-decoration: underline;
+  text-decoration-color: ${theme.colors.accent};
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+`;
+
 const ProblemGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -237,7 +244,7 @@ export default function ProblemSection() {
     { 
       title: "Partnered with Startups", 
       result: "Great demos", 
-      outcome: "Couldn&apos;t scale",
+      outcome: "Couldn't scale",
       icon: "🚀"
     }
   ];
@@ -250,7 +257,7 @@ export default function ProblemSection() {
         <SectionIntro>
           <Title>The Execution Gap</Title>
           <Subtitle>
-            Every sophisticated investor faces the same paradox: unlimited access to strategic thinking, severe scarcity of technical execution.
+            Every sophisticated investor faces the same paradox: unlimited access to strategic thinking, <AccentUnderline>severe scarcity of technical execution</AccentUnderline>.
           </Subtitle>
         </SectionIntro>
 

@@ -219,6 +219,27 @@ const CaseNumber = styled.div`
   border-radius: 20px;
 `;
 
+const ReferenceNote = styled.div`
+  text-align: center;
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(2rem, 4vw, 3rem);
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: ${theme.fonts.serif};
+  font-size: ${theme.fontSizes.lg};
+  color: ${theme.colors.textSecondary};
+  font-style: italic;
+  letter-spacing: ${theme.letterSpacing.wide};
+  line-height: ${theme.lineHeights.relaxed};
+  opacity: 0;
+  animation: ${fadeIn} 0.8s ease-out forwards;
+  animation-delay: 0.5s;
+  
+  span {
+    font-weight: ${theme.fontWeights.medium};
+    color: ${theme.colors.textPrimary};
+  }
+`;
+
 export default function CaseStudies() {
   const [inViewElements, setInViewElements] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -304,43 +325,229 @@ export default function CaseStudies() {
               <CaseNumber>0{index + 1}</CaseNumber>
               <VisualPattern />
               
-              {/* Floating geometric shapes */}
-              <VisualShape
-                $index={0}
-                style={{
-                  top: '20%',
-                  left: '15%',
-                  width: '100px',
-                  height: '100px',
-                  borderRadius: '50%',
-                }}
-              />
-              <VisualShape
-                $index={1}
-                style={{
-                  bottom: '25%',
-                  right: '20%',
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '12px',
-                  transform: 'rotate(45deg)',
-                }}
-              />
-              <VisualShape
-                $index={2}
-                style={{
-                  top: '50%',
-                  left: '50%',
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
-                  borderStyle: 'dashed',
-                }}
-              />
+              {/* Floating geometric shapes - abstractly matching engagement type */}
+              {index === 0 && (
+                <>
+                  {/* Agricultural Intelligence - data nodes, growth rings, network connections */}
+                  {/* Central data hub */}
+                  <VisualShape
+                    $index={0}
+                    style={{
+                      top: '30%',
+                      left: '30%',
+                      width: '120px',
+                      height: '120px',
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 70%)',
+                      border: '2px solid rgba(26, 26, 26, 0.1)',
+                    }}
+                  />
+                  {/* Growth rings */}
+                  <VisualShape
+                    $index={1}
+                    style={{
+                      top: '25%',
+                      left: '25%',
+                      width: '160px',
+                      height: '160px',
+                      borderRadius: '50%',
+                      borderStyle: 'dashed',
+                      borderWidth: '1px',
+                      opacity: 0.5,
+                    }}
+                  />
+                  <VisualShape
+                    $index={2}
+                    style={{
+                      top: '20%',
+                      left: '20%',
+                      width: '200px',
+                      height: '200px',
+                      borderRadius: '50%',
+                      borderWidth: '1px',
+                      borderColor: 'rgba(26, 26, 26, 0.05)',
+                      opacity: 0.3,
+                    }}
+                  />
+                  {/* Data nodes */}
+                  <VisualShape
+                    $index={3}
+                    style={{
+                      top: '15%',
+                      right: '25%',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      background: 'rgba(255, 107, 53, 0.03)',
+                      border: 'none',
+                    }}
+                  />
+                  <VisualShape
+                    $index={4}
+                    style={{
+                      bottom: '20%',
+                      left: '15%',
+                      width: '30px',
+                      height: '30px',
+                      borderRadius: '50%',
+                      background: 'rgba(26, 26, 26, 0.03)',
+                      border: 'none',
+                    }}
+                  />
+                </>
+              )}
+              
+              {index === 1 && (
+                <>
+                  {/* Fintech Fraud Detection - shields, barriers, detection grids */}
+                  {/* Main shield */}
+                  <VisualShape
+                    $index={0}
+                    style={{
+                      top: '25%',
+                      left: '35%',
+                      width: '100px',
+                      height: '120px',
+                      borderRadius: '0 0 50% 50%',
+                      transform: 'rotate(0deg)',
+                      background: 'linear-gradient(180deg, transparent 0%, rgba(255, 107, 53, 0.03) 100%)',
+                      border: '2px solid rgba(26, 26, 26, 0.1)',
+                    }}
+                  />
+                  {/* Detection grid */}
+                  <VisualShape
+                    $index={1}
+                    style={{
+                      bottom: '20%',
+                      right: '15%',
+                      width: '150px',
+                      height: '150px',
+                      borderRadius: '0',
+                      transform: 'rotate(45deg)',
+                      borderStyle: 'dashed',
+                      borderWidth: '1px',
+                      opacity: 0.4,
+                    }}
+                  />
+                  <VisualShape
+                    $index={2}
+                    style={{
+                      bottom: '25%',
+                      right: '20%',
+                      width: '120px',
+                      height: '120px',
+                      borderRadius: '0',
+                      transform: 'rotate(45deg)',
+                      borderWidth: '1px',
+                      borderColor: 'rgba(26, 26, 26, 0.05)',
+                    }}
+                  />
+                  {/* Security nodes */}
+                  <VisualShape
+                    $index={3}
+                    style={{
+                      top: '15%',
+                      right: '30%',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '4px',
+                      transform: 'rotate(45deg)',
+                      background: 'rgba(26, 26, 26, 0.02)',
+                      border: 'none',
+                    }}
+                  />
+                  <VisualShape
+                    $index={4}
+                    style={{
+                      bottom: '35%',
+                      left: '20%',
+                      width: '50px',
+                      height: '50px',
+                      borderRadius: '4px',
+                      borderStyle: 'dotted',
+                    }}
+                  />
+                </>
+              )}
+              
+              {index === 2 && (
+                <>
+                  {/* SaaS Transformation - arrows, transitions, migration paths */}
+                  {/* Transformation path */}
+                  <VisualShape
+                    $index={0}
+                    style={{
+                      top: '40%',
+                      left: '25%',
+                      width: '50%',
+                      height: '2px',
+                      background: 'linear-gradient(90deg, rgba(26, 26, 26, 0.1) 0%, rgba(26, 26, 26, 0.05) 50%, rgba(255, 107, 53, 0.1) 100%)',
+                      border: 'none',
+                      transform: 'none',
+                    }}
+                  />
+                  {/* Before state */}
+                  <VisualShape
+                    $index={1}
+                    style={{
+                      top: '30%',
+                      left: '15%',
+                      width: '80px',
+                      height: '80px',
+                      borderRadius: '50%',
+                      borderStyle: 'dotted',
+                      borderWidth: '2px',
+                      opacity: 0.5,
+                    }}
+                  />
+                  {/* After state */}
+                  <VisualShape
+                    $index={2}
+                    style={{
+                      top: '25%',
+                      right: '20%',
+                      width: '100px',
+                      height: '100px',
+                      borderRadius: '12px',
+                      background: 'rgba(255, 107, 53, 0.03)',
+                      border: '2px solid rgba(255, 107, 53, 0.1)',
+                    }}
+                  />
+                  {/* Migration nodes */}
+                  <VisualShape
+                    $index={3}
+                    style={{
+                      bottom: '30%',
+                      left: '40%',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      background: 'rgba(26, 26, 26, 0.02)',
+                      border: 'none',
+                    }}
+                  />
+                  <VisualShape
+                    $index={4}
+                    style={{
+                      bottom: '25%',
+                      right: '35%',
+                      width: '30px',
+                      height: '30px',
+                      borderRadius: '50%',
+                      borderStyle: 'dashed',
+                      opacity: 0.6,
+                    }}
+                  />
+                </>
+              )}
             </CaseVisual>
           </CaseContent>
         </CaseStudy>
       ))}
+      
+      <ReferenceNote>
+        Full client list and detailed references available under <span>mutual NDA</span>
+      </ReferenceNote>
     </Section>
   );
 }

@@ -88,16 +88,30 @@ const Subtitle = styled.p`
 const LocationsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 `;
 
-const LocationItem = styled.div`
+const LocationItem = styled.div<{ $selected?: boolean }>`
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 0;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  
+  ${props => props.$selected && `
+    transform: translateX(10px);
+    
+    .location-marker {
+      background: ${theme.colors.accent};
+      transform: scale(1.3);
+      box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    }
+    
+    .location-name {
+      color: ${theme.colors.accent};
+    }
+  `}
   
   &:hover {
     transform: translateX(10px);
@@ -111,21 +125,22 @@ const LocationItem = styled.div`
 `;
 
 const LocationMarker = styled.div`
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transition: all 0.3s ease;
 `;
 
 const LocationName = styled.span`
-  font-size: ${theme.fontSizes.base};
+  font-size: ${theme.fontSizes.sm};
   font-weight: ${theme.fontWeights.normal};
   color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
 `;
 
 const LocationDate = styled.span`
-  font-size: ${theme.fontSizes.sm};
+  font-size: ${theme.fontSizes.xs};
   color: rgba(255, 255, 255, 0.5);
   margin-left: auto;
   font-family: ${theme.fonts.mono};
@@ -151,6 +166,13 @@ const GlobeWrapper = styled.div`
   justify-content: center;
 `;
 
+const GlobeInteractionBlocker = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: all;
+`;
+
 // 2025 Travel locations with coordinates
 const locations = [
   { city: "Manila", country: "Philippines", lat: 14.5995, lng: 120.9842, date: "Jan 2025" },
@@ -168,6 +190,19 @@ export default function GlobalPresence() {
   const globeEl = useRef<any>(null);
   const [arcsData, setArcsData] = useState<any[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<typeof locations[0] | null>(null);
+
+  const handleLocationClick = (location: typeof locations[0]) => {
+    setSelectedLocation(location);
+    if (globeEl.current && globeEl.current.pointOfView) {
+      // Rotate globe to show the clicked location
+      globeEl.current.pointOfView({
+        lat: location.lat,
+        lng: location.lng,
+        altitude: 2.5
+      }, 1000); // 1 second animation
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -186,10 +221,16 @@ export default function GlobalPresence() {
     setArcsData(arcs);
 
     // Auto-rotate globe
-    if (globeEl.current && globeEl.current.controls) {
-      globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 0.5;
-    }
+    setTimeout(() => {
+      if (globeEl.current && globeEl.current.controls) {
+        const controls = globeEl.current.controls();
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+      }
+    }, 100);
   }, []);
 
   if (!mounted) return null;
@@ -203,14 +244,19 @@ export default function GlobalPresence() {
           <TextContent>
             <Title>Global Presence</Title>
             <Subtitle>
-              Building systems across continents. Available wherever sophisticated capital needs execution.
+              I&apos;ll come to you anywhere in the world. Check out where I&apos;ve been so far in 2025.
             </Subtitle>
             
             <LocationsList>
               {locations.map((location, index) => (
-                <LocationItem key={index}>
+                <LocationItem 
+                  key={index}
+                  onClick={() => handleLocationClick(location)}
+                  style={{ cursor: 'pointer' }}
+                  $selected={selectedLocation?.city === location.city}
+                >
                   <LocationMarker className="location-marker" />
-                  <LocationName>
+                  <LocationName className="location-name">
                     {location.city}, {location.country}
                   </LocationName>
                   <LocationDate>{location.date}</LocationDate>
@@ -221,6 +267,7 @@ export default function GlobalPresence() {
           
           <GlobeContainer>
             <GlobeWrapper>
+              <GlobeInteractionBlocker />
               <Globe
                 ref={globeEl}
                 width={600}
@@ -243,6 +290,7 @@ export default function GlobalPresence() {
                 hexPolygonsData={[]}
                 atmosphereColor="#ffffff"
                 atmosphereAltitude={0.15}
+                enablePointerInteraction={false}
               />
             </GlobeWrapper>
           </GlobeContainer>

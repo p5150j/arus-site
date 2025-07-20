@@ -1,7 +1,31 @@
+"use client";
+
+import styled from 'styled-components';
+import { theme } from '@/styles/theme';
+
+const FooterSection = styled.footer`
+  background: ${theme.colors.charcoal};
+  padding: 1rem;
+  text-align: center;
+`;
+
+const FooterText = styled.p`
+  color: rgba(255, 255, 255, 0.5);
+  font-size: ${theme.fontSizes.sm};
+  font-weight: ${theme.fontWeights.light};
+  letter-spacing: ${theme.letterSpacing.wide};
+  
+  span {
+    color: rgba(255, 255, 255, 0.7);
+  }
+`;
+
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1a1a] py-12 px-12 text-center text-[rgba(255,255,255,0.5)] text-[0.875rem]">
-      <p>&copy; 2024 Patrick Ortell. Ship code, not slides.</p>
-    </footer>
+    <FooterSection>
+      <FooterText>
+        Made with ❤️ by <span>arus</span> · Ship code, not slides
+      </FooterText>
+    </FooterSection>
   );
 }
