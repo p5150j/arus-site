@@ -425,7 +425,25 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    // Encode form data for Netlify
+    const encode = (data: { [key: string]: string }) => {
+      return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+    };
+    
+    // Submit to Netlify
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...formData })
+    })
+      .then(() => {
+        alert("Thanks for reaching out! I'll get back to you soon.");
+        setFormData({ name: '', email: '', company: '', message: '' });
+      })
+      .catch((error) => alert(error));
   };
 
   return (
@@ -486,7 +504,8 @@ export default function Contact() {
           </TextContent>
           
           <FormContainer>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} data-netlify="true" name="contact">
+              <input type="hidden" name="form-name" value="contact" />
               <FormGroup>
                 <Input
                   type="text"
