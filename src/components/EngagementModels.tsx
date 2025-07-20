@@ -237,15 +237,15 @@ export default function EngagementModels() {
       ]
     },
     { 
-      title: "On-Demand Expertise", 
+      title: "Flexible Engagement", 
       price: "$500-750/hr", 
-      details: "Immediate access",
+      details: "Mix & match as needed",
       icon: "🎯",
       features: [
-        "Emergency debugging",
-        "Deal evaluation calls",
-        "Code quality audits",
-        "Vendor assessments"
+        "Any service on-demand",
+        "No minimum commitment",
+        "Priority scheduling",
+        "Surge support available"
       ]
     }
   ];
