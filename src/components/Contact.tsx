@@ -423,21 +423,17 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Encode form data for Netlify
-    const encode = (data: { [key: string]: string }) => {
-      return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-    };
+    const myForm = e.target as HTMLFormElement;
+    const formData = new FormData(myForm);
     
-    // Submit to Netlify
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...formData })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      body: new URLSearchParams(formData as any).toString()
     })
       .then(() => {
         alert("Thanks for reaching out! I'll get back to you soon.");

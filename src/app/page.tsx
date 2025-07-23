@@ -55,6 +55,19 @@ export default function Home() {
 
   return (
     <PageWrapper>
+      {/* Hidden form for Netlify to detect during build */}
+      <form
+        name="contact"
+        data-netlify="true"
+        hidden
+        style={{ display: 'none' }}
+      >
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="text" name="company" />
+        <textarea name="message"></textarea>
+      </form>
+      
       <style jsx global>{`
         @keyframes fadeInUp {
           from {
