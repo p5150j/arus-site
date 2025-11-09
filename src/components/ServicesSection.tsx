@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
 
@@ -27,8 +27,17 @@ const float = keyframes`
   }
 `;
 
+const progressFlow = keyframes`
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+`;
+
 const Section = styled.section`
-  background: ${theme.colors.lightGrey};
+  background: #0a0a0a;
   padding: clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 3rem);
   position: relative;
   overflow: hidden;
@@ -66,12 +75,12 @@ const Title = styled.h2`
   font-family: ${theme.fonts.serif};
   font-size: clamp(${theme.fontSizes['4xl']}, 4vw, ${theme.fontSizes['5xl']});
   margin-bottom: 1.5rem;
-  color: ${theme.colors.charcoal};
+  color: rgba(255, 255, 255, 0.95);
   font-weight: ${theme.fontWeights.medium};
   letter-spacing: ${theme.letterSpacing.tight};
   position: relative;
   display: inline-block;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -83,7 +92,7 @@ const Title = styled.h2`
     background: ${theme.colors.accent};
     transition: width 0.4s ease;
   }
-  
+
   &:hover::after {
     width: 100%;
   }
@@ -91,139 +100,183 @@ const Title = styled.h2`
 
 const Subtitle = styled.p`
   font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.textSecondary};
+  color: rgba(255, 255, 255, 0.6);
   font-weight: ${theme.fontWeights.light};
   line-height: ${theme.lineHeights.relaxed};
   letter-spacing: ${theme.letterSpacing.normal};
 `;
 
-const ServicesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+const PipelineContainer = styled.div`
   max-width: 1100px;
-  margin: 0 auto;
-  
+  margin: 0 auto 6rem;
+  opacity: 0;
+  animation: ${fadeIn} 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+`;
+
+const PipelineTrack = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  padding: 3rem 0;
+
   @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2rem 0;
+    margin: 0 -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
-const ServiceBlock = styled.div<{ $index: number; $inView: boolean }>`
+const PipelineStage = styled.div<{ $index: number; $inView: boolean }>`
+  flex: 1;
   position: relative;
-  padding: 2.5rem;
-  background: transparent;
   opacity: ${props => props.$inView ? 1 : 0};
-  transform: ${props => props.$inView ? 'translateY(0)' : 'translateY(40px)'};
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: ${props => props.$inView ? 'translateY(0)' : 'translateY(20px)'};
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: ${props => props.$index * 0.15}s;
-  
-  &::before {
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+`;
+
+const StageCard = styled.div`
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(34, 197, 94, 0.2), 0 0 40px rgba(34, 197, 94, 0.15);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding: 2rem;
+  }
+`;
+
+const StageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+`;
+
+const StageIcon = styled.div<{ $completed: boolean }>`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: ${props => props.$completed ? '#22c55e' : 'rgba(26, 26, 26, 0.1)'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: bold;
+  transition: all 0.4s ease;
+`;
+
+const StageNumber = styled.div`
+  font-family: ${theme.fonts.mono};
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+const StageTitle = styled.h3`
+  font-size: ${theme.fontSizes.base};
+  font-weight: ${theme.fontWeights.medium};
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 0.5rem;
+  letter-spacing: ${theme.letterSpacing.tight};
+`;
+
+const StageMetric = styled.div`
+  font-family: ${theme.fonts.mono};
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.375rem;
+
+  span {
+    color: #22c55e;
+    font-weight: ${theme.fontWeights.medium};
+  }
+`;
+
+const ProgressBar = styled.div`
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 1rem;
+  position: relative;
+`;
+
+const ProgressFill = styled.div<{ $progress: number; $delay: number }>`
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #10b981);
+  width: ${props => props.$progress}%;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: ${props => props.$delay}s;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.1) 20%, rgba(26, 26, 26, 0.1) 80%, transparent);
-  }
-  
-  &:hover {
-    .service-icon {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-    
-    .service-title {
-      &::after {
-        width: 100%;
-      }
-    }
-    
-    .service-item {
-      color: ${theme.colors.textPrimary};
-    }
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: ${progressFlow} 1.5s ease-in-out infinite;
   }
 `;
 
-const ServiceIcon = styled.div`
-  width: 48px;
-  height: 48px;
-  background: ${theme.colors.charcoal};
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  font-family: ${theme.fonts.mono};
-  font-size: 1.125rem;
-  color: white;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+const PipelineConnector = styled.div`
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e 0%, #22c55e 100%);
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-`;
+  margin: 0 -1px;
+  z-index: 0;
+  flex-shrink: 0;
 
-const ServiceNumber = styled.span`
-  font-family: ${theme.fonts.mono};
-  font-size: ${theme.fontSizes.xs};
-  color: rgba(26, 26, 26, 0.4);
-  margin-bottom: 0.75rem;
-  display: block;
-  font-weight: ${theme.fontWeights.normal};
-  letter-spacing: ${theme.letterSpacing.widest};
-  text-transform: uppercase;
-`;
-
-const ServiceTitle = styled.h3`
-  font-size: ${theme.fontSizes.xl};
-  margin-bottom: 1.25rem;
-  color: ${theme.colors.charcoal};
-  font-weight: ${theme.fontWeights.medium};
-  letter-spacing: ${theme.letterSpacing.tight};
-  position: relative;
-  
   &::after {
-    content: '';
+    content: '→';
     position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: ${theme.colors.accent};
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #22c55e;
+    font-size: 1rem;
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    width: 30px;
+    margin: 0 -2px;
   }
 `;
-
-const ServiceList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const ServiceItem = styled.li`
-  padding: 0.5rem 0;
-  font-size: ${theme.fontSizes.sm};
-  color: ${theme.colors.textSecondary};
-  font-weight: ${theme.fontWeights.normal};
-  line-height: ${theme.lineHeights.relaxed};
-  position: relative;
-  padding-left: 1.75rem;
-  transition: all 0.3s ease;
-  
-  &::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    color: rgba(26, 26, 26, 0.3);
-    font-weight: ${theme.fontWeights.light};
-  }
-`;
-
 
 const BackgroundDecoration = styled.div<{ $side: 'left' | 'right' }>`
   position: absolute;
@@ -231,16 +284,16 @@ const BackgroundDecoration = styled.div<{ $side: 'left' | 'right' }>`
   ${props => props.$side === 'left' ? 'top: -20%' : 'bottom: -20%'};
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.03) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(40px);
+  filter: blur(60px);
   pointer-events: none;
   animation: ${float} 20s ease-in-out infinite;
   animation-delay: ${props => props.$side === 'left' ? '0s' : '10s'};
 `;
 
 const AnimatedPath = styled.path<{ $inView: boolean }>`
-  stroke: rgba(255, 107, 53, 0.1);
+  stroke: rgba(34, 197, 94, 0.2);
   stroke-width: 1;
   fill: none;
   stroke-dasharray: 1000;
@@ -257,55 +310,56 @@ export default function ServicesSection() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0');
-            setInViewElements(prev => new Set(prev).add(index));
+            setInViewElements(prev => new Set([...prev, 0]));
           }
         });
       },
       { threshold: 0.2 }
     );
 
-    const elements = sectionRef.current?.querySelectorAll('.service-observe');
-    elements?.forEach(el => observer.observe(el));
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     return () => {
-      elements?.forEach(el => observer.unobserve(el));
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
   }, []);
 
-  const services = [
+  const pipelineStages = [
     {
       number: "01",
-      title: "New Ventures",
-      icon: "{ }",
-      items: [
-        "Transform thesis to working product",
-        "Build scalable technical foundation",
-        "Recruit permanent engineering leadership",
-        "Complete knowledge transfer"
-      ]
+      title: "Discover",
+      metric: "3-5 days",
+      value: "Deep technical audit",
+      progress: 100,
+      icon: "✓"
     },
     {
       number: "02",
-      title: "Portfolio Rescue",
-      icon: "⚡",
-      items: [
-        "Fix stalled technical initiatives",
-        "Replace failing development teams",
-        "Scale for institutional clients",
-        "Prepare technical assets for exit"
-      ]
+      title: "Build",
+      metric: "8-12 weeks",
+      value: "Production-ready MVP",
+      progress: 100,
+      icon: "✓"
     },
     {
       number: "03",
-      title: "Investment Support",
-      icon: "◆",
-      items: [
-        "Technical due diligence with code review",
-        "Build versus buy analysis",
-        "Post-acquisition integration",
-        "Interim technical leadership"
-      ]
+      title: "Deploy",
+      metric: "< 48 hours",
+      value: "Live in production",
+      progress: 100,
+      icon: "✓"
+    },
+    {
+      number: "04",
+      title: "Scale",
+      metric: "Ongoing",
+      value: "Revenue generating",
+      progress: 100,
+      icon: "✓"
     }
   ];
 
@@ -315,11 +369,11 @@ export default function ServicesSection() {
         <GridPattern viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <pattern id="grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(26, 26, 26, 0.1)" strokeWidth="0.5"/>
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width="100" height="100" fill="url(#grid)" />
-          <AnimatedPath 
+          <AnimatedPath
             $inView={inViewElements.size > 0}
             d="M 10,50 Q 30,20 50,50 T 90,50"
           />
@@ -337,30 +391,38 @@ export default function ServicesSection() {
           </Subtitle>
         </SectionIntro>
 
-        <ServicesGrid>
-          {services.map((service, index) => (
-            <ServiceBlock 
-              key={index} 
-              $index={index} 
-              $inView={inViewElements.has(index)}
-              className="service-observe"
-              data-index={index}
-            >
-              <ServiceIcon className="service-icon">
-                {service.icon}
-              </ServiceIcon>
-              <ServiceNumber className="service-number">{service.number}</ServiceNumber>
-              <ServiceTitle className="service-title">{service.title}</ServiceTitle>
-              <ServiceList>
-                {service.items.map((item, itemIndex) => (
-                  <ServiceItem key={itemIndex} className="service-item">
-                    {item}
-                  </ServiceItem>
-                ))}
-              </ServiceList>
-            </ServiceBlock>
-          ))}
-        </ServicesGrid>
+        <PipelineContainer>
+          <PipelineTrack>
+            {pipelineStages.map((stage, index) => (
+              <React.Fragment key={index}>
+                <PipelineStage
+                  $index={index}
+                  $inView={inViewElements.size > 0}
+                >
+                  <StageCard>
+                    <StageHeader>
+                      <StageIcon $completed={true}>
+                        {stage.icon}
+                      </StageIcon>
+                      <StageNumber>Stage {stage.number}</StageNumber>
+                    </StageHeader>
+                    <StageTitle>{stage.title}</StageTitle>
+                    <StageMetric>
+                      Timeline: <span>{stage.metric}</span>
+                    </StageMetric>
+                    <StageMetric>
+                      Output: <span>{stage.value}</span>
+                    </StageMetric>
+                    <ProgressBar>
+                      <ProgressFill $progress={stage.progress} $delay={0.5 + index * 0.2} />
+                    </ProgressBar>
+                  </StageCard>
+                </PipelineStage>
+                {index < pipelineStages.length - 1 && <PipelineConnector />}
+              </React.Fragment>
+            ))}
+          </PipelineTrack>
+        </PipelineContainer>
       </Container>
     </Section>
   );

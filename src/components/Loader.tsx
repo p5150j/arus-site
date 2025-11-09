@@ -42,22 +42,10 @@ export default function Loader() {
       pointerEvents: hide ? 'none' : 'auto',
       transition: 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
     }}>
-      <div style={{ 
+      <div style={{
         textAlign: 'center',
         position: 'relative'
       }}>
-        {/* Logo */}
-        <h1 style={{
-          fontFamily: 'var(--font-playfair), serif',
-          fontSize: '2rem',
-          color: 'white',
-          marginBottom: '3rem',
-          opacity: 0,
-          animation: 'fade-in-up 0.6s ease-out forwards'
-        }}>
-          Patrick Ortell
-        </h1>
-
         {/* Progress bar */}
         <div style={{
           width: '200px',

@@ -7,7 +7,6 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ProblemSection from '@/components/ProblemSection';
 import ServicesSection from '@/components/ServicesSection';
-import CaseStudies from '@/components/CaseStudies';
 import EngagementModels from '@/components/EngagementModels';
 import GlobalPresence from '@/components/GlobalPresence';
 import Philosophy from '@/components/Philosophy';
@@ -202,24 +201,20 @@ export default function Home() {
       <SectionTransition $index={2}>
         <ServicesSection />
       </SectionTransition>
-      
+
       <SectionTransition $index={3}>
-        <CaseStudies />
-      </SectionTransition>
-      
-      <SectionTransition $index={4}>
         <EngagementModels />
       </SectionTransition>
-      
-      <SectionTransition $index={5}>
+
+      <SectionTransition $index={4}>
         <GlobalPresence />
       </SectionTransition>
-      
-      <SectionTransition $index={6}>
+
+      <SectionTransition $index={5}>
         <Philosophy />
       </SectionTransition>
-      
-      <SectionTransition $index={7}>
+
+      <SectionTransition $index={6}>
         <Contact />
       </SectionTransition>
       

@@ -20,6 +20,10 @@ const Section = styled.section`
   padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem);
   position: relative;
   overflow: hidden;
+
+  * {
+    font-feature-settings: 'tnum', 'zero';
+  }
 `;
 
 const BackgroundGradient = styled.div`
@@ -75,177 +79,176 @@ const AccentUnderline = styled.span`
   text-decoration-color: ${theme.colors.accent};
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
+  font-weight: ${theme.fontWeights.semibold};
 `;
 
-const ProblemGrid = styled.div`
+const TerminalGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3px;
-  background: rgba(26, 26, 26, 0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  animation: ${fadeIn} 0.8s ease-out forwards;
-  animation-delay: 0.4s;
+  gap: 1.5rem;
 
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
   }
 `;
 
-const ProblemCard = styled.div<{ $index: number }>`
-  background: ${theme.colors.beige};
-  padding: 3rem;
-  position: relative;
+const TerminalWindow = styled.div<{ $delay: number }>`
+  background: rgba(26, 26, 26, 0.98);
+  border-radius: 12px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, ${theme.colors.lightGrey} 0%, rgba(255, 107, 53, 0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-  
-  &:hover {
-    transform: scale(1.02);
-    z-index: 10;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    
-    &::before {
-      opacity: 1;
-    }
-    
-    .icon {
-      transform: scale(1.2) rotate(10deg);
-      opacity: 0.2;
-    }
-    
-    .arrow {
-      transform: translateX(8px);
-      color: ${theme.colors.accent};
-    }
-    
-    .outcome {
-      color: ${theme.colors.accent};
-      font-weight: 600;
-    }
-    
-    h3 {
-      color: ${theme.colors.accent};
-    }
-  }
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  animation: ${fadeIn} 0.8s ease-out forwards;
+  animation-delay: ${props => props.$delay}s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 2rem;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
   }
 `;
 
-const ProblemIcon = styled.div`
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-size: 2.5rem;
-  opacity: 0.1;
-  transition: all 0.4s ease;
+const TerminalHeader = styled.div`
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const TerminalControls = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const TerminalButton = styled.div<{ $color: string }>`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: ${props => props.$color};
+  opacity: 0.4;
+`;
+
+const TerminalTitle = styled.div`
+  font-family: ${theme.fonts.mono};
+  font-size: ${theme.fontSizes.xs};
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+`;
+
+const TerminalBody = styled.div`
+  padding: 1.5rem;
+  font-family: ${theme.fonts.mono};
+  font-size: ${theme.fontSizes.sm};
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: 1.25rem;
+    font-size: ${theme.fontSizes.xs};
+  }
+`;
+
+const CommandLine = styled.div`
+  display: flex;
+  margin-bottom: 0.25rem;
+
+  &:hover {
+    .command-text {
+      color: rgba(255, 255, 255, 0.95);
+    }
+  }
+`;
+
+const Prompt = styled.span`
+  color: #22c55e;
+  margin-right: 0.5rem;
   user-select: none;
 `;
 
-const ProblemContent = styled.div`
-  position: relative;
-  z-index: 1;
+const CommandText = styled.span`
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s ease;
 `;
 
-const ProblemTitle = styled.h3`
-  font-size: ${theme.fontSizes.xl};
-  margin-bottom: 1.5rem;
-  color: ${theme.colors.charcoal};
-  font-weight: ${theme.fontWeights.semibold};
-  letter-spacing: ${theme.letterSpacing.tight};
-  transition: color 0.3s ease;
-`;
-
-const ProblemFlow = styled.div`
+const OutputLine = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: 1rem;
+  margin-bottom: 0.25rem;
 `;
 
-const ProblemText = styled.p`
-  color: ${theme.colors.textSecondary};
-  font-size: ${theme.fontSizes.base};
-  font-weight: ${theme.fontWeights.normal};
-  line-height: ${theme.lineHeights.normal};
-  margin: 0;
+const OutputPrefix = styled.span`
+  color: rgba(255, 255, 255, 0.4);
+  margin-right: 0.75rem;
+  min-width: 3rem;
+  user-select: none;
 `;
 
-const Arrow = styled.span`
-  display: inline-block;
-  color: ${theme.colors.accent};
-  font-size: 1.25rem;
-  font-weight: 300;
-  transition: all 0.3s ease;
+const OutputText = styled.span`
+  color: rgba(255, 255, 255, 0.65);
 `;
 
-const Outcome = styled.p`
-  color: ${theme.colors.textPrimary};
-  font-size: ${theme.fontSizes.base};
-  font-weight: ${theme.fontWeights.medium};
-  line-height: ${theme.lineHeights.normal};
-  margin: 0;
-  transition: all 0.3s ease;
+const ErrorLine = styled.div`
+  margin-left: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
 `;
 
-const CornerDecoration = styled.div`
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: 80px;
-  height: 80px;
-  background: ${theme.colors.accent};
-  opacity: 0;
-  transform: rotate(45deg);
-  transition: all 0.4s ease;
-  
-  ${ProblemCard}:hover & {
-    opacity: 0.1;
-    bottom: 0;
-    right: 0;
-  }
+const ErrorPrefix = styled.span`
+  color: #ef4444;
+  font-weight: ${theme.fontWeights.semibold};
+  margin-right: 0.5rem;
 `;
+
+const ErrorText = styled.span`
+  color: #fca5a5;
+`;
+
+
 
 export default function ProblemSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const problems = [
-    { 
-      title: "Engaged McKinsey", 
-      result: "Received 200-page deck", 
-      outcome: "No working product",
-      icon: "📊"
+  const attempts = [
+    {
+      command: "execute --strategy consulting",
+      args: [
+        { key: "vendor", value: "McKinsey" },
+        { key: "duration", value: "6mo" },
+        { key: "output", value: "200-page deck" }
+      ],
+      error: "ExecutionError: No working product shipped"
     },
-    { 
-      title: 'Hired "AI Experts"', 
-      result: "Months of workshops", 
-      outcome: "Still planning phase",
-      icon: "🤖"
+    {
+      command: "hire --role ai-expert",
+      args: [
+        { key: "process", value: "workshops" },
+        { key: "duration", value: "12mo+" },
+        { key: "status", value: "planning" }
+      ],
+      error: "TimeoutError: Still in planning phase"
     },
-    { 
-      title: "Built Innovation Lab", 
-      result: "$5M invested", 
-      outcome: "Zero revenue",
-      icon: "🏢"
+    {
+      command: "build --type innovation-lab",
+      args: [
+        { key: "investment", value: "$5M" },
+        { key: "duration", value: "18mo" },
+        { key: "revenue", value: "$0" }
+      ],
+      error: "ValidationError: Zero revenue generated"
     },
-    { 
-      title: "Partnered with Startups", 
-      result: "Great demos", 
-      outcome: "Couldn't scale",
-      icon: "🚀"
+    {
+      command: "partner --with startups",
+      args: [
+        { key: "demos", value: "excellent" },
+        { key: "duration", value: "9mo" },
+        { key: "scale", value: "failed" }
+      ],
+      error: "ScaleError: Couldn't scale to production"
     }
   ];
 
@@ -261,26 +264,39 @@ export default function ProblemSection() {
           </Subtitle>
         </SectionIntro>
 
-        <ProblemGrid className="problem-grid">
-          {problems.map((problem, index) => (
-            <ProblemCard key={index} $index={index}>
-              <ProblemIcon className="icon">
-                {problem.icon}
-              </ProblemIcon>
-              
-              <ProblemContent>
-                <ProblemTitle>{problem.title}</ProblemTitle>
-                <ProblemFlow>
-                  <ProblemText>{problem.result}</ProblemText>
-                  <Arrow className="arrow">→</Arrow>
-                  <Outcome className="outcome">{problem.outcome}</Outcome>
-                </ProblemFlow>
-              </ProblemContent>
-              
-              <CornerDecoration />
-            </ProblemCard>
+        <TerminalGrid>
+          {attempts.map((attempt, index) => (
+            <TerminalWindow key={index} $delay={0.4 + index * 0.1}>
+              <TerminalHeader>
+                <TerminalControls>
+                  <TerminalButton $color="#ff5f56" />
+                  <TerminalButton $color="#ffbd2e" />
+                  <TerminalButton $color="#27c93f" />
+                </TerminalControls>
+                <TerminalTitle>attempt-{index + 1}.log</TerminalTitle>
+              </TerminalHeader>
+
+              <TerminalBody>
+                <CommandLine>
+                  <Prompt>$</Prompt>
+                  <CommandText className="command-text">{attempt.command}</CommandText>
+                </CommandLine>
+
+                {attempt.args.map((arg, argIndex) => (
+                  <OutputLine key={argIndex}>
+                    <OutputPrefix>{arg.key}:</OutputPrefix>
+                    <OutputText>{arg.value}</OutputText>
+                  </OutputLine>
+                ))}
+
+                <ErrorLine>
+                  <ErrorPrefix>Error:</ErrorPrefix>
+                  <ErrorText>{attempt.error}</ErrorText>
+                </ErrorLine>
+              </TerminalBody>
+            </TerminalWindow>
           ))}
-        </ProblemGrid>
+        </TerminalGrid>
       </Container>
     </Section>
   );
