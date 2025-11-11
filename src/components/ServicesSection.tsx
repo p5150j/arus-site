@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
+import GradientBlobs from './GradientBlobs';
 
 const fadeIn = keyframes`
   from {
@@ -365,6 +366,7 @@ export default function ServicesSection() {
 
   return (
     <Section ref={sectionRef} id="services">
+      <GradientBlobs theme="dark" />
       <BackgroundCanvas>
         <GridPattern viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>

@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
+import GradientBlobs from './GradientBlobs';
 
 const fadeIn = keyframes`
   from {
@@ -26,17 +27,6 @@ const Section = styled.section`
   }
 `;
 
-const BackgroundGradient = styled.div`
-  position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.05) 0%, transparent 60%);
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-`;
 
 const Container = styled.div`
   max-width: 1200px;
@@ -254,8 +244,35 @@ export default function ProblemSection() {
 
   return (
     <Section ref={sectionRef} id="problem">
-      <BackgroundGradient />
-      
+      <GradientBlobs
+        blobs={[
+          {
+            size: 700,
+            top: '5%',
+            left: '10%',
+            color: 'radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, rgba(255, 107, 53, 0.1) 50%, transparent 70%)',
+            duration: 20,
+            delay: 0,
+          },
+          {
+            size: 650,
+            top: '40%',
+            left: '70%',
+            color: 'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%)',
+            duration: 25,
+            delay: 5,
+          },
+          {
+            size: 600,
+            top: '75%',
+            left: '20%',
+            color: 'radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.06) 50%, transparent 70%)',
+            duration: 22,
+            delay: 10,
+          },
+        ]}
+      />
+
       <Container>
         <SectionIntro>
           <Title>The Execution Gap</Title>

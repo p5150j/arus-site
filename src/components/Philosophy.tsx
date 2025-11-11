@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
+import GradientBlobs from './GradientBlobs';
 
 const float = keyframes`
   0%, 100% {
@@ -273,7 +274,8 @@ export default function Philosophy() {
   return (
     <Section ref={sectionRef}>
       <GeometricPattern />
-      
+      <GradientBlobs theme="accent" />
+
       <BackgroundShape $top="10%" $left="10%" $size={300} $delay={0} />
       <BackgroundShape $top="70%" $left="80%" $size={400} $delay={2} />
       <BackgroundShape $top="50%" $left="50%" $size={200} $delay={4} />

@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { theme } from '@/styles/theme';
+import GradientBlobs from './GradientBlobs';
 
 const fadeIn = keyframes`
   from {
@@ -51,16 +52,24 @@ const SectionIntro = styled.div`
 
 const Title = styled.h2`
   font-family: ${theme.fonts.serif};
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.75rem);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 1.75rem;
+  }
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
   line-height: 1.8;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 0.85rem;
+  }
 `;
 
 const ModelsGrid = styled.div`
@@ -144,29 +153,41 @@ const ModelCard = styled.div<{ $index: number; $hovered: boolean }>`
 
 
 const ModelTitle = styled.h3`
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
   transition: color 0.3s ease;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 0.9rem;
+  }
 `;
 
 const ModelPrice = styled.div`
   font-family: ${theme.fonts.sans};
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 1rem 0;
   font-weight: 200;
   letter-spacing: -0.02em;
   transition: color 0.3s ease;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const ModelDetails = styled.p`
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   opacity: 0.6;
   margin-bottom: 2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 0.7rem;
+  }
 `;
 
 const ModelFeatures = styled.ul`
@@ -179,18 +200,22 @@ const ModelFeatures = styled.ul`
 `;
 
 const Feature = styled.li`
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   opacity: 0.7;
   padding: 0.5rem 0;
   position: relative;
   padding-left: 1.5rem;
-  
+
   &::before {
     content: '—';
     position: absolute;
     left: 0;
     color: rgba(255, 255, 255, 0.3);
     font-weight: 200;
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: 0.75rem;
   }
 `;
 
@@ -253,8 +278,8 @@ export default function EngagementModels() {
   return (
     <Section ref={sectionRef} id="models">
       <BackgroundPattern />
-      
-      
+      <GradientBlobs theme="dark" />
+
       <Container>
         <SectionIntro>
           <Title>Engagement Models</Title>
