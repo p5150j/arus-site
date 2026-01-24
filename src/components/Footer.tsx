@@ -1,31 +1,21 @@
-"use client";
-
-import styled from 'styled-components';
-import { theme } from '@/styles/theme';
-
-const FooterSection = styled.footer`
-  background: ${theme.colors.charcoal};
-  padding: 1rem;
-  text-align: center;
-`;
-
-const FooterText = styled.p`
-  color: rgba(255, 255, 255, 0.5);
-  font-size: ${theme.fontSizes.sm};
-  font-weight: ${theme.fontWeights.light};
-  letter-spacing: ${theme.letterSpacing.wide};
-  
-  span {
-    color: rgba(255, 255, 255, 0.7);
-  }
-`;
-
 export default function Footer() {
   return (
-    <FooterSection>
-      <FooterText>
-        Made with ❤️ by <span>arus</span> · Ship code, not slides
-      </FooterText>
-    </FooterSection>
+    <footer className="px-6 md:px-12 lg:px-24 py-12 border-t border-white/10">
+      <div className="flex flex-wrap gap-6 justify-between items-center text-sm text-white/40">
+        <p>&copy; {new Date().getFullYear()} Patrick Ortell</p>
+        <div className="flex gap-6">
+          <a href="/blog" className="hover:text-white transition-colors">Blog</a>
+          <a href="/feed.xml" className="hover:text-white transition-colors">RSS</a>
+          <a
+            href="https://linkedin.com/in/patrickortell"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </footer>
   );
 }

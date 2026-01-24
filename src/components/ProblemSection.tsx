@@ -1,320 +1,152 @@
-"use client";
-
-import { useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { theme } from '@/styles/theme';
-import GradientBlobs from './GradientBlobs';
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const Section = styled.section`
-  background: ${theme.colors.beige};
-  padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem);
-  position: relative;
-  overflow: hidden;
-
-  * {
-    font-feature-settings: 'tnum', 'zero';
-  }
-`;
-
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-`;
-
-const SectionIntro = styled.div`
-  max-width: 800px;
-  margin: 0 auto 5rem;
-  text-align: center;
-  opacity: 0;
-  animation: ${fadeIn} 0.8s ease-out forwards;
-  animation-delay: 0.2s;
-`;
-
-const Title = styled.h2`
-  font-family: ${theme.fonts.serif};
-  font-size: clamp(${theme.fontSizes['4xl']}, 4vw, ${theme.fontSizes['5xl']});
-  margin-bottom: 1.5rem;
-  color: ${theme.colors.charcoal};
-  letter-spacing: ${theme.letterSpacing.tight};
-  line-height: ${theme.lineHeights.tight};
-  font-weight: ${theme.fontWeights.medium};
-`;
-
-const Subtitle = styled.p`
-  font-size: ${theme.fontSizes.lg};
-  color: ${theme.colors.textSecondary};
-  font-weight: ${theme.fontWeights.light};
-  line-height: ${theme.lineHeights.relaxed};
-  letter-spacing: ${theme.letterSpacing.normal};
-  max-width: 600px;
-  margin: 0 auto;
-`;
-
-const AccentUnderline = styled.span`
-  text-decoration: underline;
-  text-decoration-color: ${theme.colors.accent};
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
-  font-weight: ${theme.fontWeights.semibold};
-`;
-
-const TerminalGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const TerminalWindow = styled.div<{ $delay: number }>`
-  background: rgba(26, 26, 26, 0.98);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0;
-  animation: ${fadeIn} 0.8s ease-out forwards;
-  animation-delay: ${props => props.$delay}s;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
-  }
-`;
-
-const TerminalHeader = styled.div`
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const TerminalControls = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-const TerminalButton = styled.div<{ $color: string }>`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: ${props => props.$color};
-  opacity: 0.4;
-`;
-
-const TerminalTitle = styled.div`
-  font-family: ${theme.fonts.mono};
-  font-size: ${theme.fontSizes.xs};
-  color: rgba(255, 255, 255, 0.5);
-  margin-left: 0.5rem;
-  letter-spacing: 0.05em;
-`;
-
-const TerminalBody = styled.div`
-  padding: 1.5rem;
-  font-family: ${theme.fonts.mono};
-  font-size: ${theme.fontSizes.sm};
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.85);
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 1.25rem;
-    font-size: ${theme.fontSizes.xs};
-  }
-`;
-
-const CommandLine = styled.div`
-  display: flex;
-  margin-bottom: 0.25rem;
-
-  &:hover {
-    .command-text {
-      color: rgba(255, 255, 255, 0.95);
-    }
-  }
-`;
-
-const Prompt = styled.span`
-  color: #22c55e;
-  margin-right: 0.5rem;
-  user-select: none;
-`;
-
-const CommandText = styled.span`
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.2s ease;
-`;
-
-const OutputLine = styled.div`
-  display: flex;
-  align-items: flex-start;
-  margin-left: 1rem;
-  margin-bottom: 0.25rem;
-`;
-
-const OutputPrefix = styled.span`
-  color: rgba(255, 255, 255, 0.4);
-  margin-right: 0.75rem;
-  min-width: 3rem;
-  user-select: none;
-`;
-
-const OutputText = styled.span`
-  color: rgba(255, 255, 255, 0.65);
-`;
-
-const ErrorLine = styled.div`
-  margin-left: 1rem;
-  margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
-`;
-
-const ErrorPrefix = styled.span`
-  color: #ef4444;
-  font-weight: ${theme.fontWeights.semibold};
-  margin-right: 0.5rem;
-`;
-
-const ErrorText = styled.span`
-  color: #fca5a5;
-`;
-
-
-
 export default function ProblemSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const attempts = [
+  const problems = [
     {
-      command: "execute --strategy consulting",
-      args: [
-        { key: "vendor", value: "McKinsey" },
-        { key: "duration", value: "6mo" },
-        { key: "output", value: "200-page deck" }
-      ],
-      error: "ExecutionError: No working product shipped"
+      num: '01',
+      title: 'Vibe Coded Mess',
+      desc: '25% of YC startups are 95% AI-generated code. Yours too? Nobody on your team actually understands what\'s in there.',
     },
     {
-      command: "hire --role ai-expert",
-      args: [
-        { key: "process", value: "workshops" },
-        { key: "duration", value: "12mo+" },
-        { key: "status", value: "planning" }
-      ],
-      error: "TimeoutError: Still in planning phase"
+      num: '02',
+      title: 'Black Box Code',
+      desc: '45% of AI-generated code has security vulnerabilities. It works... but will it hold up to due diligence?',
     },
     {
-      command: "build --type innovation-lab",
-      args: [
-        { key: "investment", value: "$5M" },
-        { key: "duration", value: "18mo" },
-        { key: "revenue", value: "$0" }
-      ],
-      error: "ValidationError: Zero revenue generated"
+      num: '03',
+      title: 'Can\'t Vet Talent',
+      desc: 'You need to hire devs but can\'t evaluate skills. Is this senior actually senior, or just good at prompting?',
     },
     {
-      command: "partner --with startups",
-      args: [
-        { key: "demos", value: "excellent" },
-        { key: "duration", value: "9mo" },
-        { key: "scale", value: "failed" }
-      ],
-      error: "ScaleError: Couldn't scale to production"
-    }
+      num: '04',
+      title: 'Getting Fleeced',
+      desc: 'Is your agency padding estimates? Building for $50K what you could buy for $500/mo? You\'d never know.',
+    },
   ];
 
   return (
-    <Section ref={sectionRef} id="problem">
-      <GradientBlobs
-        blobs={[
-          {
-            size: 700,
-            top: '5%',
-            left: '10%',
-            color: 'radial-gradient(circle, rgba(255, 107, 53, 0.3) 0%, rgba(255, 107, 53, 0.1) 50%, transparent 70%)',
-            duration: 20,
-            delay: 0,
-          },
-          {
-            size: 650,
-            top: '40%',
-            left: '70%',
-            color: 'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%)',
-            duration: 25,
-            delay: 5,
-          },
-          {
-            size: 600,
-            top: '75%',
-            left: '20%',
-            color: 'radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.06) 50%, transparent 70%)',
-            duration: 22,
-            delay: 10,
-          },
-        ]}
-      />
+    <section className="relative py-32 bg-[#070707] overflow-visible">
+      {/* Large decorative element spanning to next section - RIGHT SIDE */}
+      <div className="absolute -right-64 bottom-[-400px] w-[900px] h-[900px] pointer-events-none z-0">
+        {/* Outer rings */}
+        <div className="absolute inset-0 rounded-full border border-accent/[0.08]" />
+        <div className="absolute inset-12 rounded-full border border-accent/[0.07]" />
+        <div className="absolute inset-24 rounded-full border border-accent/[0.06]" />
+        <div className="absolute inset-36 rounded-full border border-accent/[0.05]" />
+        <div className="absolute inset-48 rounded-full border border-accent/[0.04]" />
+        <div className="absolute inset-60 rounded-full border border-white/[0.04]" />
+        <div className="absolute inset-72 rounded-full border border-white/[0.03]" />
+        <div className="absolute inset-84 rounded-full border border-white/[0.02]" />
+        {/* Inner glow */}
+        <div className="absolute inset-[350px] rounded-full bg-gradient-to-br from-accent/[0.04] to-transparent" />
+      </div>
 
-      <Container>
-        <SectionIntro>
-          <Title>The Execution Gap</Title>
-          <Subtitle>
-            Every sophisticated investor faces the same paradox: unlimited access to strategic thinking, <AccentUnderline>severe scarcity of technical execution</AccentUnderline>.
-          </Subtitle>
-        </SectionIntro>
+      {/* Secondary geometric accent */}
+      <div className="absolute right-40 bottom-[-150px] w-48 h-48 pointer-events-none z-0 opacity-[0.05]">
+        <div className="absolute inset-0 border-2 border-white rotate-45" />
+        <div className="absolute inset-6 border-2 border-white rotate-45" />
+        <div className="absolute inset-12 border-2 border-white rotate-45" />
+      </div>
 
-        <TerminalGrid>
-          {attempts.map((attempt, index) => (
-            <TerminalWindow key={index} $delay={0.4 + index * 0.1}>
-              <TerminalHeader>
-                <TerminalControls>
-                  <TerminalButton $color="#ff5f56" />
-                  <TerminalButton $color="#ffbd2e" />
-                  <TerminalButton $color="#27c93f" />
-                </TerminalControls>
-                <TerminalTitle>attempt-{index + 1}.log</TerminalTitle>
-              </TerminalHeader>
+      <div className="px-8 md:px-16 lg:px-24 relative z-10">
+        {/* Header */}
+        <div className="mb-16">
+          <span className="text-xs text-accent tracking-[0.25em] uppercase">
+            The Problem
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mt-4">
+            You need senior guidance,
+            <br />
+            <span className="text-white/25">not a $300K salary</span>
+          </h2>
+        </div>
 
-              <TerminalBody>
-                <CommandLine>
-                  <Prompt>$</Prompt>
-                  <CommandText className="command-text">{attempt.command}</CommandText>
-                </CommandLine>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Large feature card */}
+          <div className="lg:col-span-2 lg:row-span-2 rounded-3xl border border-white/[0.08] bg-gradient-to-br from-white/[0.04] to-transparent p-8 md:p-10 flex flex-col relative overflow-hidden">
+            {/* Background geometric shapes */}
+            <div className="absolute -right-20 -bottom-20 w-80 h-80 opacity-[0.03]">
+              <div className="absolute inset-0 rounded-full border-[3px] border-white" />
+              <div className="absolute inset-8 rounded-full border-[3px] border-white" />
+              <div className="absolute inset-16 rounded-full border-[3px] border-white" />
+              <div className="absolute inset-24 rounded-full border-[3px] border-white" />
+            </div>
+            <div className="absolute top-10 right-10 w-20 h-20 border border-accent/10 rotate-45" />
 
-                {attempt.args.map((arg, argIndex) => (
-                  <OutputLine key={argIndex}>
-                    <OutputPrefix>{arg.key}:</OutputPrefix>
-                    <OutputText>{arg.value}</OutputText>
-                  </OutputLine>
-                ))}
+            <p className="text-lg text-white/50 leading-relaxed mb-6 relative z-10">
+              Your team shipped fast with Cursor and Copilot. Great. But now there&apos;s 50K lines of code
+              nobody fully understands, and &quot;rescue engineering&quot; is the hottest job in tech for a reason.
+            </p>
+            <p className="text-lg text-white/50 leading-relaxed mb-auto relative z-10">
+              Even Cursor&apos;s CEO warns that vibe-coded apps &quot;look fine at first but crumble as they grow.&quot;
+              You need senior eyes before investors or customers find the cracks.
+            </p>
 
-                <ErrorLine>
-                  <ErrorPrefix>Error:</ErrorPrefix>
-                  <ErrorText>{attempt.error}</ErrorText>
-                </ErrorLine>
-              </TerminalBody>
-            </TerminalWindow>
+            {/* Geometric accent shape */}
+            <div className="mt-8 flex justify-end relative z-10">
+              <div className="w-32 h-32 relative">
+                <div className="absolute inset-0 rounded-full border border-accent/20" />
+                <div className="absolute inset-4 rounded-full border border-accent/30" />
+                <div className="absolute inset-8 rounded-full bg-accent/10" />
+                <div className="absolute inset-10 rounded-full bg-accent/20" />
+              </div>
+            </div>
+          </div>
+
+          {/* Salary stat card */}
+          <div className="lg:col-span-2 rounded-3xl border border-accent/20 bg-gradient-to-br from-accent/[0.08] to-transparent p-8 flex flex-col justify-between min-h-[200px] relative overflow-hidden">
+            {/* Background shapes */}
+            <div className="absolute -right-10 -top-10 w-40 h-40 opacity-[0.08]">
+              <div className="absolute inset-0 border-2 border-accent rounded-full" />
+              <div className="absolute inset-6 border-2 border-accent rounded-full" />
+              <div className="absolute inset-12 border-2 border-accent rounded-full" />
+            </div>
+            <div className="absolute right-20 bottom-4 w-16 h-16 border border-accent/10 rounded-lg rotate-12" />
+
+            <span className="text-xs text-accent/60 tracking-[0.2em] uppercase relative z-10">
+              Average CTO Salary
+            </span>
+            <div className="relative z-10">
+              <span className="text-5xl md:text-6xl font-medium text-white">$285K</span>
+              <span className="block text-white/30 text-sm mt-2">+ equity, benefits, overhead</span>
+            </div>
+          </div>
+
+          {/* Problem cards */}
+          {problems.map((problem, index) => (
+            <div
+              key={problem.num}
+              className="rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-white/[0.12] transition-all duration-300 relative overflow-hidden group"
+            >
+              {/* Different geometric shapes for each card */}
+              {index === 0 && (
+                <div className="absolute -right-6 -bottom-6 w-24 h-24 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity">
+                  <div className="absolute inset-0 rounded-full border-2 border-white" />
+                  <div className="absolute inset-4 rounded-full border-2 border-white" />
+                </div>
+              )}
+              {index === 1 && (
+                <div className="absolute -right-4 -bottom-4 w-20 h-20 border-2 border-white/[0.04] group-hover:border-white/[0.08] rotate-45 transition-colors" />
+              )}
+              {index === 2 && (
+                <div className="absolute -right-8 -bottom-8 w-28 h-28 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity">
+                  <div className="absolute inset-0 border-2 border-white" style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }} />
+                  <div className="absolute inset-4 border-2 border-white" style={{ clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)' }} />
+                </div>
+              )}
+              {index === 3 && (
+                <>
+                  <div className="absolute -right-3 -bottom-3 w-16 h-16 rounded-full border-2 border-white/[0.04] group-hover:border-white/[0.08] transition-colors" />
+                  <div className="absolute right-6 bottom-6 w-8 h-8 rounded-full border-2 border-white/[0.04] group-hover:border-white/[0.08] transition-colors" />
+                </>
+              )}
+
+              <span className="text-accent/40 font-mono text-sm relative z-10">({problem.num})</span>
+              <h3 className="text-white text-lg font-medium mt-3 mb-2 relative z-10">{problem.title}</h3>
+              <p className="text-white/40 text-sm leading-relaxed relative z-10">{problem.desc}</p>
+            </div>
           ))}
-        </TerminalGrid>
-      </Container>
-    </Section>
+        </div>
+      </div>
+    </section>
   );
 }
