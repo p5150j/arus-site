@@ -45,7 +45,7 @@ export default function Home() {
       <section className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
         <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">What I help with</h2>
 
-        <ul className="space-y-6 text-xl text-white/60 max-w-3xl">
+        <ul className="space-y-5 text-lg text-white/60 max-w-3xl">
           <li>
             <strong className="text-white font-semibold">Architecture decisions</strong>
             <span className="text-white/40"> — </span>
@@ -59,7 +59,7 @@ export default function Home() {
           <li>
             <strong className="text-white font-semibold">AI/ML implementation</strong>
             <span className="text-white/40"> — </span>
-            LLMs, MLOps, when to build vs. buy. I shipped the first chatbot in AgTech, a year before everyone else.
+            LLMs, MLOps, when to build vs. buy. I shipped the first agentic spectral analysis models in AgTech.
           </li>
           <li>
             <strong className="text-white font-semibold">Product & roadmap</strong>
@@ -80,6 +80,11 @@ export default function Home() {
             <strong className="text-white font-semibold">Founder sanity checks</strong>
             <span className="text-white/40"> — </span>
             "My dev says this will take 6 months. Is that real?"
+          </li>
+          <li>
+            <strong className="text-white font-semibold">Building the thing</strong>
+            <span className="text-white/40"> — </span>
+            Sometimes you just need someone to ship it. I can build MVPs, prototypes, or production features — solo or alongside your team. (May cost extra depending on scope™)
           </li>
         </ul>
       </section>
@@ -120,7 +125,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row gap-12 max-w-4xl">
           <div className="md:w-56 flex-shrink-0">
             <Image
-              src="/patrick-v2.jpg"
+              src="/patrick-v3.jpg"
               alt="Patrick Ortell"
               width={224}
               height={398}
@@ -161,7 +166,7 @@ export default function Home() {
               "He will not say what you want to hear, but need to hear. Forging a solution
               that is fit for the task with as little ego as possible."
             </p>
-            <footer className="text-white/40 font-mono text-sm">
+            <footer className="text-[#FFE500] font-mono text-sm">
               Ben Niehaus, CTO at SpexAI
             </footer>
           </blockquote>
@@ -172,7 +177,7 @@ export default function Home() {
               He has this rare ability to immediately understand a problem and zero in on
               smart, scrappy ways to solve it."
             </p>
-            <footer className="text-white/40 font-mono text-sm">
+            <footer className="text-[#FFE500] font-mono text-sm">
               Larissa Licha, Co-Founder at Joyn
             </footer>
           </blockquote>
@@ -182,7 +187,7 @@ export default function Home() {
               "He can be anything you need him to be. Architect, developer, product shepherd,
               teacher, organizer, leader... I believe he's the best CTO in Colorado."
             </p>
-            <footer className="text-white/40 font-mono text-sm">
+            <footer className="text-[#FFE500] font-mono text-sm">
               Robert Schachte, Co-Founder at HYVV
             </footer>
           </blockquote>
@@ -193,7 +198,7 @@ export default function Home() {
               choices that fit our product and resource constraints, helping us stay focused
               and move fast, even during pivots."
             </p>
-            <footer className="text-white/40 font-mono text-sm">
+            <footer className="text-[#FFE500] font-mono text-sm">
               Corbin Long, Product at Project Liberty
             </footer>
           </blockquote>
