@@ -10,6 +10,9 @@ export default function Header() {
         <Link href="/blog" className="hover:text-white transition-colors">
           blog
         </Link>
+        <Link href="/resume" className="hover:text-white transition-colors">
+          resume
+        </Link>
       </nav>
     </header>
   );
