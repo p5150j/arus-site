@@ -13,6 +13,9 @@ export default function Header() {
         <Link href="/resume" className="hover:text-white transition-colors">
           resume
         </Link>
+        <a href="https://impact.arus.io/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          impact
+        </a>
       </nav>
     </header>
   );
