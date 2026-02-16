@@ -98,6 +98,30 @@ export default async function PostPage({ params }: PageProps) {
 }
 
 function formatContent(content: string): string {
+  // Process tables before other transformations
+  content = content.replace(
+    /((?:^\|.+\|$\n?)+)/gm,
+    (tableBlock) => {
+      const rows = tableBlock.trim().split('\n').filter(r => r.trim());
+      if (rows.length < 2) return tableBlock;
+
+      const parseRow = (row: string) =>
+        row.split('|').slice(1, -1).map(cell => cell.trim());
+
+      const headerCells = parseRow(rows[0]);
+      // Skip separator row (row[1] with dashes)
+      const bodyRows = rows.slice(2);
+
+      const thead = `<thead><tr>${headerCells.map(c => `<th class="px-4 py-3 text-left text-sm font-semibold text-white border-b border-white/20">${c}</th>`).join('')}</tr></thead>`;
+      const tbody = bodyRows.map(row => {
+        const cells = parseRow(row);
+        return `<tr>${cells.map(c => `<td class="px-4 py-3 text-sm text-white/60 border-b border-white/10">${c}</td>`).join('')}</tr>`;
+      }).join('');
+
+      return `<div class="overflow-x-auto my-6"><table class="w-full border-collapse">${thead}<tbody>${tbody}</tbody></table></div>`;
+    }
+  );
+
   return content
     .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold text-white mt-10 mb-4">$1</h3>')
     .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold text-white mt-12 mb-6">$1</h2>')
@@ -110,7 +134,7 @@ function formatContent(content: string): string {
     .replace(/^- (.*$)/gim, '<li class="text-white/60">$1</li>')
     .replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-6 my-6 space-y-2">$&</ul>')
     .replace(/\n\n/g, '</p><p class="text-lg text-white/60 leading-relaxed my-6">')
-    .replace(/^(?!<[huplo])(.*)/gm, (match, p1) => {
+    .replace(/^(?!<[huplo\d])(.*)/gm, (_match, p1) => {
       if (!p1.trim() || p1.startsWith('<')) return p1;
       return `<p class="text-lg text-white/60 leading-relaxed my-6">${p1}</p>`;
     });
