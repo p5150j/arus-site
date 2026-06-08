@@ -1,10 +1,11 @@
 export default function Contact() {
   return (
     <section id="contact" className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
-      <h2 className="text-3xl md:text-4xl font-black text-white mb-8 tracking-tight">Let's talk</h2>
+      <h2 className="text-3xl md:text-4xl font-black text-white mb-8 tracking-tight">Hire me</h2>
 
-      <p className="text-xl text-white/60 leading-relaxed mb-10 max-w-xl">
-        Book a 30-minute intro call. No pitch, no pressure — just a conversation to see if I can help.
+      <p className="text-xl text-white/60 leading-relaxed mb-10 max-w-2xl">
+        Looking for my next full-time role — VP Engineering, CTO, Head of AI, or Technical AI Product Management.
+        Remote, hybrid in Colorado, or the right opportunity anywhere.
       </p>
 
       <a
@@ -13,7 +14,7 @@ export default function Contact() {
         rel="noopener noreferrer"
         className="inline-block px-8 py-4 bg-white text-[#0a0a0a] text-lg font-semibold rounded hover:bg-white/90 transition-colors mb-12"
       >
-        Book a call
+        Book a 30-min intro call
       </a>
 
       <div className="space-y-3 text-lg text-white/50">

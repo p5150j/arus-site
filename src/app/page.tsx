@@ -11,26 +11,24 @@ export default function Home() {
       {/* Hero */}
       <section className="px-6 md:px-12 lg:px-24 pt-32 pb-24 max-w-4xl">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight mb-10">
-          I help small teams make better technical decisions.
+          I build and lead the engineering teams that ship AI.
         </h1>
 
         <div className="space-y-6 text-xl md:text-2xl text-white/60 leading-relaxed max-w-2xl">
           <p>
-            14 years building software. Three exits. Scaled teams from zero to 80+.
+            14 years building software. Three exits. Teams scaled from two to 80+. Products from $0 to $50M ARR.
           </p>
           <p>
-            Now I do fractional CTO work — a few hours a month, async-first, no chaos.
+            VP Engineering, CTO, Technical AI Product Manager. Looking for the next one.
           </p>
         </div>
 
         <div className="mt-12 flex flex-wrap gap-4">
           <a
-            href="https://calendar.app.google/hbi5hCjnYi6uFcBW7"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/resume"
             className="px-8 py-4 bg-white text-[#0a0a0a] text-lg font-semibold rounded hover:bg-white/90 transition-colors"
           >
-            Book a call
+            See the full resume
           </a>
           <a
             href="mailto:patrick.ortell@arus.io"
@@ -41,82 +39,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What I help with */}
+      {/* What I do */}
       <section className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
-        <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">What I help with</h2>
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">What I do</h2>
 
-        <ul className="space-y-5 text-lg text-white/60 max-w-3xl">
+        <ul className="space-y-8 text-lg text-white/60 max-w-3xl">
           <li>
-            <strong className="text-white font-semibold">Architecture decisions</strong>
-            <span className="text-white/40"> — </span>
-            "Should we use X or Y? How do we structure this?"
+            <strong className="text-white font-semibold block mb-2">Ship AI/ML in production</strong>
+            First agentic AI assistant in AgTech, a full year ahead of any competitor. RAG over 2,000+ academic studies. Custom PyTorch + OpenCV computer vision pipelines. 70% support cost reduction via LLM automation. 85% fewer production incidents through MLOps discipline.
           </li>
           <li>
-            <strong className="text-white font-semibold">Code review</strong>
-            <span className="text-white/40"> — </span>
-            "Is this going to bite us later?"
+            <strong className="text-white font-semibold block mb-2">Lead engineering teams</strong>
+            IC → Director → VP → CTO across five companies. Up to 18 direct reports. 95% team satisfaction. 100% on-time delivery, eight consecutive quarters. Remote-first, async, no chaos.
           </li>
           <li>
-            <strong className="text-white font-semibold">AI/ML implementation</strong>
-            <span className="text-white/40"> — </span>
-            LLMs, MLOps, when to build vs. buy. I shipped the first agentic spectral analysis models in AgTech.
+            <strong className="text-white font-semibold block mb-2">Scale companies</strong>
+            Three acquisitions. $0 to $50M ARR. Teams from two to 80+. I&apos;ve been in the room for the fundraises, the diligence, and the integrations.
           </li>
           <li>
-            <strong className="text-white font-semibold">Product & roadmap</strong>
-            <span className="text-white/40"> — </span>
-            Backlog grooming, sprint planning, writing user stories that devs don't hate. I've been CPO and TPM.
+            <strong className="text-white font-semibold block mb-2">Own architecture & infrastructure</strong>
+            AWS, GCP, Azure, Kubernetes, Terraform. Cloud migrations, SOC2 audits, HIPAA-compliant data pipelines, NFT marketplaces on Flow, decentralized exchanges on Ethereum, Rust protocol work on Substrate.
           </li>
           <li>
-            <strong className="text-white font-semibold">Infrastructure</strong>
-            <span className="text-white/40"> — </span>
-            AWS, GCP, Azure, Kubernetes, Terraform. Cloud migrations, SOC2 compliance, infosec audits, architecture reviews — more times than I can count.
-          </li>
-          <li>
-            <strong className="text-white font-semibold">Technical hiring</strong>
-            <span className="text-white/40"> — </span>
-            I'll sit in your interviews. You'll know who can actually code.
-          </li>
-          <li>
-            <strong className="text-white font-semibold">Founder sanity checks</strong>
-            <span className="text-white/40"> — </span>
-            "My dev says this will take 6 months. Is that real?"
-          </li>
-          <li>
-            <strong className="text-white font-semibold">Building the thing</strong>
-            <span className="text-white/40"> — </span>
-            Sometimes you just need someone to ship it. I can build MVPs, prototypes, or production features — solo or alongside your team. (May cost extra depending on scope™)
+            <strong className="text-white font-semibold block mb-2">Drive product & roadmap</strong>
+            Technical Product Manager for Frequency Protocol and SpexAI. PMF validation, roadmap development, sprint planning, technical due diligence. I&apos;ve been CPO and TPM — I know how to write user stories engineers don&apos;t hate.
           </li>
         </ul>
       </section>
 
-      {/* How it works */}
+      {/* By the numbers */}
       <section className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
-        <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">How it works</h2>
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">By the numbers</h2>
 
-        <div className="space-y-16 max-w-3xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 max-w-5xl">
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Monthly retainer
-              <span className="font-mono text-white/40 ml-4">$1,500–2,500</span>
-            </h3>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Async Slack/Discord access. Zoom/Hangouts when you need face time. 4-6 hours of actual work per month — code review, architecture calls,
-              debugging sessions. Response within 24-48 hours.
-              Like having a senior technical advisor on speed dial.
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">3</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">Exits</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">$50M</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">ARR grown from $0</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">80+</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">Team peak (from 2)</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">14yr</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">Shipping software</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">100%</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">On-time, 8 quarters</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">-85%</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">Production incidents</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">-70%</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">Support cost via LLMs</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">-60%</div>
+            <div className="text-sm text-white/50 font-mono uppercase tracking-wider">MTTR</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Recently */}
+      <section className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">Recently</h2>
+
+        <div className="space-y-12 max-w-3xl">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Project Liberty — Frequency Protocol</h3>
+            <p className="text-sm text-white/40 font-mono mb-4">Technical Product Manager · Nov 2022 – Nov 2025</p>
+            <p className="text-lg text-white/60 leading-relaxed">
+              Directed an 11-engineer distributed team across 4 time zones building a Rust-based decentralized social protocol.
+              Shipped on-chain LLM context portability, a B2B consent-based data marketplace, and Rust PII security nodes.
+              Eight consecutive quarters of 100% on-time delivery.
             </p>
           </div>
 
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              One-time audit
-              <span className="font-mono text-white/40 ml-4">$2,500–5,000</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              SpexAI <span className="text-[#FFE500] font-mono text-base ml-2">(acquired)</span>
             </h3>
-            <p className="text-xl text-white/60 leading-relaxed">
-              Deep dive into your codebase, architecture, or infrastructure. Written report with
-              prioritized recommendations. 90-min walkthrough call. 2 weeks of follow-up questions.
-              Good for before a raise, before a pivot, or when something feels wrong but you don't know what.
+            <p className="text-sm text-white/40 font-mono mb-4">ML Engineer & Product Owner · Sep 2022 – Mar 2025</p>
+            <p className="text-lg text-white/60 leading-relaxed">
+              Led the full AI/ML portfolio for an enterprise AgTech platform. Shipped the first agentic AI assistant in AgTech a full year
+              ahead of any competitor. Built RAG over 2,000+ academic studies, custom PyTorch + OpenCV CV pipelines, and Langchain
+              agents for NL-to-SQL across greenhouse operations. Cut support costs 70%, production incidents 85%.
             </p>
           </div>
+
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Techstars</h3>
+            <p className="text-sm text-white/40 font-mono mb-4">All Star Mentor · Jun 2023 – Present</p>
+            <p className="text-lg text-white/60 leading-relaxed">
+              All Star Mentor three years running. Pro bono lead mentor for early-stage AI companies — model evaluation, RAG
+              architectures, technical hiring, SOC2 prep. Built the automated technical and product due diligence pipelines
+              Techstars uses to grade program applicants.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <a
+            href="/resume"
+            className="text-white/40 hover:text-white transition-colors font-mono text-sm"
+          >
+            → See the full resume
+          </a>
         </div>
       </section>
 
@@ -135,7 +170,7 @@ export default function Home() {
 
           <div className="space-y-6 text-xl text-white/60 leading-relaxed">
             <p>
-              I'm Patrick. I've been CTO, VP Engineering, CPO, Technical Product Owner.
+              I&apos;m Patrick. I&apos;ve been CTO, VP Engineering, CPO, Technical Product Owner.
               Built teams, shipped products, been through three acquisitions.
               Written Rust for blockchain protocols, Python for ML pipelines,
               and mass amounts of JavaScript.
@@ -146,11 +181,10 @@ export default function Home() {
               mentor at youth hackathons — 9 years now.
             </p>
             <p>
-              I'm a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">Techstars</a> mentor. If you're in the network, you might already know me.
-              If not, let's fix that.
+              I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
             </p>
             <p className="text-white/40">
-              Fort Collins, Colorado. Working remotely with teams everywhere.
+              Fort Collins, Colorado. Open to remote, hybrid, or the right opportunity anywhere.
             </p>
           </div>
         </div>
@@ -163,8 +197,8 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl">
           <blockquote className="space-y-4">
             <p className="text-xl text-white/70 leading-relaxed">
-              "He will not say what you want to hear, but need to hear. Forging a solution
-              that is fit for the task with as little ego as possible."
+              &ldquo;He will not say what you want to hear, but need to hear. Forging a solution
+              that is fit for the task with as little ego as possible.&rdquo;
             </p>
             <footer className="text-[#FFE500] font-mono text-sm">
               Ben Niehaus, CTO at SpexAI
@@ -173,19 +207,19 @@ export default function Home() {
 
           <blockquote className="space-y-4">
             <p className="text-xl text-white/70 leading-relaxed">
-              "Patrick was one of our mentors at Techstars and easily the most impactful.
+              &ldquo;Patrick was one of our mentors at Techstars and easily the most impactful.
               He has this rare ability to immediately understand a problem and zero in on
-              smart, scrappy ways to solve it."
+              smart, scrappy ways to solve it.&rdquo;
             </p>
             <footer className="text-[#FFE500] font-mono text-sm">
-              Larissa Licha, Co-Founder at Joyn
+              Larissa Licha, Product Director, AI Context & Memory at Miro
             </footer>
           </blockquote>
 
           <blockquote className="space-y-4">
             <p className="text-xl text-white/70 leading-relaxed">
-              "He can be anything you need him to be. Architect, developer, product shepherd,
-              teacher, organizer, leader... I believe he's the best CTO in Colorado."
+              &ldquo;He can be anything you need him to be. Architect, developer, product shepherd,
+              teacher, organizer, leader... I believe he&apos;s the best CTO in Colorado.&rdquo;
             </p>
             <footer className="text-[#FFE500] font-mono text-sm">
               Robert Schachte, Co-Founder at HYVV
@@ -194,12 +228,12 @@ export default function Home() {
 
           <blockquote className="space-y-4">
             <p className="text-xl text-white/70 leading-relaxed">
-              "Patrick didn't just recite technical facts. He translated ML intricacies into
+              &ldquo;Patrick didn&apos;t just recite technical facts. He translated ML intricacies into
               choices that fit our product and resource constraints, helping us stay focused
-              and move fast, even during pivots."
+              and move fast, even during pivots.&rdquo;
             </p>
             <footer className="text-[#FFE500] font-mono text-sm">
-              Corbin Long, Product at Project Liberty
+              Corbin Long, Product at Amplica Labs
             </footer>
           </blockquote>
         </div>

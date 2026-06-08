@@ -70,7 +70,7 @@ export default function ResumePage() {
             <h3 className="text-xl font-semibold text-white mb-4">AI/ML & Product</h3>
             <ul className="list-disc pl-5 space-y-3 text-base text-white/60">
               <li>
-                <strong className="text-white font-semibold">First AI chatbot in AgTech</strong>
+                <strong className="text-white font-semibold">First agentic AI assistant in AgTech</strong>
                 <span className="text-white/40"> — </span>
                 A full year ahead of any competitor; designed prompts, reduced hallucinations, iterated on adoption data
               </li>
@@ -289,7 +289,7 @@ export default function ResumePage() {
             </p>
             <ul className="space-y-3 text-lg text-white/60">
               <li>Built custom OpenCV + PyTorch object detection pipeline for spectral imaging cameras analyzing plant health in real time — detecting mold, disease, and measuring transpiration rates</li>
-              <li>Shipped the first AI chatbot/assistant in AgTech — a full year ahead of any competitor — designed prompts, optimized for accuracy, reduced hallucinations</li>
+              <li>Shipped the first agentic AI assistant in AgTech — a full year ahead of any competitor — designed prompts, optimized for accuracy, reduced hallucinations</li>
               <li>Reduced support costs 70% by building LLM-powered automation (GPT-4, Langchain) — end-to-end from prompt engineering through deployment and monitoring</li>
               <li>Architected a RAG system ingesting 2,000+ academic studies on plant health and botany — deployed as a daily copilot for greenhouse growers via Azure GPT</li>
               <li>Designed Langchain agents (OSS + closed LLMs + NLTK) converting natural language into cross-domain database queries for greenhouse operations</li>
@@ -632,9 +632,7 @@ export default function ResumePage() {
           <blockquote className="space-y-4">
             <p className="text-xl text-white/70 leading-relaxed">
               &ldquo;He will not say what you want to hear, but need to hear. Forging a solution
-              that is fit for the task with as little ego as possible. His first product to market
-              was the first ChatBot in an AgTech application, at least a year ahead of everyone else.
-              Because he can cut through the noise.&rdquo;
+              that is fit for the task with as little ego as possible. Because he can cut through the noise.&rdquo;
             </p>
             <footer className="text-[#FFE500] font-mono text-sm">
               Ben Niehaus, CTO at SpexAI

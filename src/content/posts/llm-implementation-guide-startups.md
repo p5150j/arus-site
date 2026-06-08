@@ -1,13 +1,13 @@
 ---
 title: "How to Actually Add LLMs to Your Product"
-description: "I shipped the first chatbot in AgTech before everyone else figured it out. Here's what I learned."
+description: "I shipped the first agentic AI assistant in AgTech before everyone else figured it out. Here's what I learned."
 date: "2024-01-08"
 tags: ["llm", "ai", "startups", "implementation"]
 ---
 
 Everyone's adding AI to their product. Most are doing it wrong.
 
-I shipped the first chatbot in AgTech — at least a year before anyone else in the space figured it out. Since then I've helped dozens of startups add LLM features. Here's what actually works.
+I shipped the first agentic AI assistant in AgTech — at least a year before anyone else in the space figured it out. Since then I've helped dozens of startups add LLM features. Here's what actually works.
 
 ## Start with the problem, not the tech
 
