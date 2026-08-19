@@ -16,6 +16,9 @@ export default function Header() {
         <a href="https://impact.arus.io/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
           impact
         </a>
+        <a href="https://travel.arus.io/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          travel
+        </a>
       </nav>
     </header>
   );
