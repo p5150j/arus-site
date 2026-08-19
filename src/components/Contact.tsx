@@ -1,11 +1,12 @@
 export default function Contact() {
   return (
     <section id="contact" className="px-6 md:px-12 lg:px-24 py-24 border-t border-white/10">
-      <h2 className="text-3xl md:text-4xl font-black text-white mb-8 tracking-tight">Hire me</h2>
+      <h2 className="text-3xl md:text-4xl font-black text-white mb-8 tracking-tight">Work with me</h2>
 
       <p className="text-xl text-white/60 leading-relaxed mb-10 max-w-2xl">
-        Looking for my next full-time role — VP Engineering, CTO, Head of AI, or Technical AI Product Management.
-        Remote, hybrid in Colorado, or the right opportunity anywhere.
+        Days, I&apos;m architecting enterprise AI infrastructure at myCOI. Beyond that, I still advise
+        early-stage founders — AI strategy, architecture reviews, technical due diligence, hiring.
+        If you&apos;ve got a hard problem, let&apos;s talk.
       </p>
 
       <a

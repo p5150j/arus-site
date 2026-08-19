@@ -6,21 +6,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL('https://arus.io'),
   title: {
-    default: 'Patrick Ortell | Fractional CTO & Technical Advisor',
+    default: 'Patrick Ortell | AI Infrastructure & Platform Architect',
     template: '%s | Patrick Ortell'
   },
-  description: 'Senior AI & engineering help without the full-time hire. LLMs, MLOps, architecture, infrastructure - 14 years shipping, 3 exits. Fractional CTO services for startups and small teams.',
+  description: 'AI Infrastructure & Platform Architect at myCOI. In-house LLM fine-tuning, GraphRAG, MLOps, enterprise AI platforms - 14 years shipping, 3 exits. Advising startups through Techstars and beyond.',
   keywords: [
-    'fractional CTO',
+    'AI infrastructure architect',
+    'LLM fine-tuning',
+    'LoRA',
+    'GraphRAG',
     'technical advisor',
     'AI consultant',
-    'LLM implementation',
     'MLOps',
-    'startup CTO',
     'technical due diligence',
     'engineering leadership',
-    'Techstars mentor',
-    'AWS architect'
+    'Techstars mentor'
   ],
   authors: [{ name: 'Patrick Ortell', url: 'https://linkedin.com/in/patrickortell' }],
   creator: 'Patrick Ortell',
@@ -28,22 +28,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://arus.io',
-    siteName: 'Patrick Ortell - Fractional CTO',
-    title: 'Patrick Ortell | Fractional CTO & Technical Advisor',
-    description: 'Senior AI & engineering help without the full-time hire. LLMs, MLOps, architecture, infrastructure - 14 years shipping, 3 exits.',
+    siteName: 'Patrick Ortell - AI Infrastructure & Platform Architect',
+    title: 'Patrick Ortell | AI Infrastructure & Platform Architect',
+    description: 'In-house LLM fine-tuning, GraphRAG, MLOps, enterprise AI platforms - 14 years shipping, 3 exits.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Patrick Ortell - Fractional CTO & Technical Advisor',
+        alt: 'Patrick Ortell - AI Infrastructure & Platform Architect',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Patrick Ortell | Fractional CTO & Technical Advisor',
-    description: 'Senior AI & engineering help without the full-time hire. LLMs, MLOps, architecture - 14 years shipping, 3 exits.',
+    title: 'Patrick Ortell | AI Infrastructure & Platform Architect',
+    description: 'In-house LLM fine-tuning, GraphRAG, MLOps, enterprise AI platforms - 14 years shipping, 3 exits.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -69,23 +69,23 @@ const jsonLd = {
       '@type': 'Person',
       '@id': 'https://arus.io/#person',
       name: 'Patrick Ortell',
-      jobTitle: 'Fractional CTO & Technical Advisor',
+      jobTitle: 'AI Infrastructure & Platform Architect',
+      worksFor: { '@type': 'Organization', name: 'myCOI' },
       email: 'patrick.ortell@arus.io',
       url: 'https://arus.io',
       sameAs: ['https://linkedin.com/in/patrickortell'],
-      knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'LLM Implementation', 'MLOps', 'Cloud Architecture', 'AWS', 'Kubernetes', 'Technical Leadership', 'Startup Advisory'],
-      description: 'Fractional CTO with 14+ years of experience, 3 successful exits, and expertise in AI/ML, cloud architecture, and engineering leadership.'
+      knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'LLM Fine-Tuning', 'LoRA', 'GraphRAG', 'Knowledge Graphs', 'MLOps', 'Cloud Architecture', 'AWS', 'Kubernetes', 'Technical Leadership', 'Startup Advisory'],
+      description: 'AI Infrastructure & Platform Architect with 14+ years of experience, 3 successful exits, and expertise in LLM fine-tuning, GraphRAG, MLOps, and engineering leadership.'
     },
     {
       '@type': 'ProfessionalService',
       '@id': 'https://arus.io/#service',
-      name: 'Patrick Ortell - Fractional CTO Services',
+      name: 'Patrick Ortell - Technical Advisory',
       provider: { '@id': 'https://arus.io/#person' },
       url: 'https://arus.io',
-      description: 'Fractional CTO and technical advisory services for startups and small teams.',
+      description: 'Technical advisory and AI/ML consulting for startups — strategy, architecture reviews, and technical due diligence.',
       areaServed: 'Worldwide',
-      serviceType: ['Fractional CTO', 'Technical Advisory', 'AI/ML Consulting', 'Architecture Review', 'Technical Due Diligence'],
-      priceRange: '$1,500 - $5,000/month'
+      serviceType: ['Technical Advisory', 'AI/ML Consulting', 'Architecture Review', 'Technical Due Diligence']
     }
   ]
 };

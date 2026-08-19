@@ -19,7 +19,9 @@ export default function Home() {
             14 years building software. Three exits. Teams scaled from two to 80+. Products from $0 to $50M ARR.
           </p>
           <p>
-            VP Engineering, CTO, Technical AI Product Manager. Looking for the next one.
+            VP Engineering, CTO, Technical AI Product Manager. Currently architecting
+            enterprise AI infrastructure at myCOI — in-house LLM fine-tuning, GraphRAG,
+            and model serving that never lets data leave the building.
           </p>
         </div>
 
@@ -113,6 +115,18 @@ export default function Home() {
 
         <div className="space-y-12 max-w-3xl">
           <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">myCOI / Illumend</h3>
+            <p className="text-sm text-white/40 font-mono mb-4">AI Infrastructure & Platform Architect (Consultant) · Jan 2026 – Present</p>
+            <p className="text-lg text-white/60 leading-relaxed">
+              Architecting the in-house AI platform for an enterprise insurance-compliance company.
+              LoRA fine-tuning pipelines on open-source foundation models that replicate subject-matter
+              experts across complex policy lines, hybrid GraphRAG over massive corporate repositories,
+              and locally-served models with 100% PII containment — no vendor lock-in, zero external
+              data transmission.
+            </p>
+          </div>
+
+          <div>
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Project Liberty — Frequency Protocol</h3>
             <p className="text-sm text-white/40 font-mono mb-4">Technical Product Manager · Nov 2022 – Nov 2025</p>
             <p className="text-lg text-white/60 leading-relaxed">
@@ -184,7 +198,7 @@ export default function Home() {
               I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
             </p>
             <p className="text-white/40">
-              Fort Collins, Colorado. Open to remote, hybrid, or the right opportunity anywhere.
+              Fort Collins, Colorado. Working remote, like always.
             </p>
           </div>
         </div>

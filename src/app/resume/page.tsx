@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Resume',
-  description: 'Patrick Ortell — Engineering leader and AI/ML practitioner with 14+ years shipping production systems. CTO, VP Engineering, Technical AI Product Manager. 3 exits.',
+  description: 'Patrick Ortell — Engineering leader and AI/ML practitioner with 14+ years shipping production systems. AI Infrastructure & Platform Architect, CTO, VP Engineering. 3 exits.',
 };
 
 export default function ResumePage() {
@@ -19,7 +19,7 @@ export default function ResumePage() {
           Patrick Ortell
         </h1>
         <p className="text-xl md:text-2xl text-white/60 leading-relaxed mb-2">
-          VP Engineering | CTO | Technical AI Product Manager | AI/ML Leader
+          AI Infrastructure & Platform Architect | VP Engineering | CTO | AI/ML Leader
         </p>
         <p className="text-lg text-white/40 font-mono">
           Fort Collins, CO (Remote-First)
@@ -53,8 +53,8 @@ export default function ResumePage() {
         <p className="text-xl text-white/60 leading-relaxed max-w-3xl">
           Engineering leader and AI/ML practitioner with 14+ years shipping production systems — not demos, not
           decks, not prototypes. 3 exits. Teams scaled from 2 to 80+. Products from $0 to $50M ARR. I&rsquo;ve been
-          CTO, VP Engineering, Technical Product Owner, ML Engineer, and Fractional CTO across startups,
-          enterprise AI platforms, and decentralized protocol teams. Off the clock, I do{' '}
+          CTO, VP Engineering, AI Infrastructure Architect, Technical Product Owner, ML Engineer, and Fractional
+          CTO across startups, enterprise AI platforms, and decentralized protocol teams. Off the clock, I do{' '}
           <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">pro bono AI/ML work for nonprofits</a>,
           mentor at Techstars (#GiveFirst, All Star Mentor 3 consecutive years), and ship open-source projects
           that are equal parts unhinged and useful.
@@ -69,6 +69,16 @@ export default function ResumePage() {
           <div>
             <h3 className="text-xl font-semibold text-white mb-4">AI/ML & Product</h3>
             <ul className="list-disc pl-5 space-y-3 text-base text-white/60">
+              <li>
+                <strong className="text-white font-semibold">In-house SME replication via LoRA</strong>
+                <span className="text-white/40"> — </span>
+                Fine-tuning pipelines on open-source foundation models replicating subject-matter experts across complex insurance policy lines, zero vendor lock-in
+              </li>
+              <li>
+                <strong className="text-white font-semibold">Enterprise GraphRAG</strong>
+                <span className="text-white/40"> — </span>
+                High-throughput hybrid knowledge-graph + RAG architecture with distributed vector storage, indexing massive corporate repositories with high retrieval accuracy
+              </li>
               <li>
                 <strong className="text-white font-semibold">First agentic AI assistant in AgTech</strong>
                 <span className="text-white/40"> — </span>
@@ -222,6 +232,23 @@ export default function ResumePage() {
         <h2 className="text-3xl md:text-4xl font-black text-white mb-12 tracking-tight">Experience</h2>
 
         <div className="space-y-16 max-w-3xl">
+
+          {/* myCOI / Illumend */}
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">AI Infrastructure & Platform Architect (Consultant)</h3>
+            <p className="text-lg text-white/40 font-mono mb-4">myCOI / Illumend | Jan 2026 – Present | Remote / Hybrid</p>
+            <p className="text-lg text-white/60 mb-4">
+              Architecting the in-house enterprise AI platform for an insurance-compliance leader — fine-tuning,
+              retrieval, and model-serving infrastructure built to run entirely inside the company&apos;s own boundary.
+            </p>
+            <ul className="space-y-3 text-lg text-white/60">
+              <li>Architected and deployed in-house LoRA fine-tuning pipelines on open-source foundation models — replicating subject-matter experts across complex insurance policy lines without third-party vendor lock-in</li>
+              <li>Designed a high-throughput hybrid GraphRAG (knowledge graph + RAG) architecture paired with distributed vector databases — processing and indexing massive corporate repositories with high retrieval accuracy</li>
+              <li>Implemented strict localized data boundaries and local model-serving pipelines — 100% PII containment and zero external data transmission, in compliance with regulatory standards</li>
+              <li>Consulted directly with executive management on hardware capacity planning, model-serving strategy, and the enterprise AI roadmap</li>
+            </ul>
+            <p className="mt-3 text-sm text-white/30 font-mono">LoRA/PEFT fine-tuning, open-source LLMs, GraphRAG, knowledge graphs, distributed vector DBs, local model serving, bare-metal GPU infrastructure</p>
+          </div>
 
           {/* Techstars */}
           <div>
@@ -400,7 +427,7 @@ export default function ResumePage() {
           <li>
             <strong className="text-white font-semibold">AI/ML & Prompt Engineering</strong>
             <span className="text-white/40"> — </span>
-            LLMs, PyTorch, TensorFlow, OpenCV, Langchain/LangGraph, A2A, NLTK, prompt optimization, hallucination reduction, AI assistant/agent design, RAG architectures, NL2SQL, computer vision, object detection, digital twins, CFD modeling, predictive modeling, MLflow, SageMaker/Bedrock, Azure OpenAI, Vertex, MLOps, model deployment, AI context portability, data sovereignty
+            LLMs, LoRA/PEFT fine-tuning, PyTorch, TensorFlow, OpenCV, Langchain/LangGraph, A2A, NLTK, prompt optimization, hallucination reduction, AI assistant/agent design, RAG architectures, GraphRAG, knowledge graphs, NL2SQL, computer vision, object detection, digital twins, CFD modeling, predictive modeling, MLflow, SageMaker/Bedrock, Azure OpenAI, Vertex, MLOps, model deployment, AI context portability, data sovereignty
           </li>
           <li>
             <strong className="text-white font-semibold">Product Management</strong>
