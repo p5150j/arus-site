@@ -3,34 +3,43 @@
 @tailwind utilities;
 
 :root {
-  /* warm near-black, not pure black */
-  --ink: #0e0d0b;
-  --paper: #f3efe6;
-  --muted: rgba(243, 239, 230, 0.62);
-  --faint: rgba(243, 239, 230, 0.38);
-  --rule: rgba(243, 239, 230, 0.12);
-  --accent: #FFE500;
+  --yellow: #FFE500;
+  --ink: #111111;
+  --paper: #F4F1E8;
+}
+
+html {
+  background: var(--yellow);
 }
 
 body {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--yellow);
+  color: var(--ink);
   @apply antialiased;
 }
 
-::selection {
-  background: var(--accent);
-  color: var(--ink);
+/* Long-read pages set this on <main> */
+.paper {
+  background: var(--paper);
 }
 
-/* Minimal scrollbar */
+::selection {
+  background: var(--ink);
+  color: var(--yellow);
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--ink);
+  background: var(--yellow);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--rule);
-  border-radius: 3px;
+  background: var(--ink);
+}
+
+@layer utilities {
+  .label {
+    @apply font-mono text-[11px] md:text-xs uppercase tracking-[0.06em];
+  }
 }

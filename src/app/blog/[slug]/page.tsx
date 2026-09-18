@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -43,48 +44,49 @@ export default async function PostPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a]">
+    <main className="paper text-ink min-h-screen">
       <Header />
 
-      <article className="max-w-3xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-24">
-        <header className="mb-12">
-          <time className="text-sm font-mono text-white/30 block mb-4">
-            {new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight tracking-tight">
-            {post.title}
-          </h1>
-
-          {post.description && (
-            <p className="text-xl text-white/50 leading-relaxed">
-              {post.description}
-            </p>
-          )}
+      <article className="mx-auto max-w-site px-5 md:px-10 pt-10 md:pt-16 pb-20 grid grid-cols-1 md:grid-cols-12 gap-x-6">
+        <header className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-4 pb-8 mb-10 border-b-2 border-ink">
+          <div className="md:col-span-2 font-mono text-[13px] flex md:flex-col gap-x-4 gap-y-1">
+            <time>
+              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+            {post.tags && post.tags.length > 0 && <span>{post.tags.join(' · ')}</span>}
+          </div>
+          <div className="md:col-span-9">
+            <h1 className="font-black text-4xl md:text-6xl leading-[0.95] tracking-[-0.04em] mb-5">
+              {post.title}
+            </h1>
+            {post.description && (
+              <p className="text-xl md:text-2xl leading-snug tracking-[-0.01em] max-w-[52ch]">{post.description}</p>
+            )}
+          </div>
         </header>
 
+        <div className="hidden md:block md:col-span-2 label pt-1">
+          <Link href="/blog" className="hover:underline underline-offset-4">← Writing</Link>
+        </div>
+
         <div
-          className="prose-dark"
+          className="md:col-span-7 max-w-[68ch] text-[18px] leading-[1.55]"
           dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
         />
 
-        <footer className="mt-16 pt-8 border-t border-white/10">
-          <p className="text-white/50">
-            Have questions?{' '}
+        <footer className="md:col-span-12 mt-16 pt-4 border-t-2 border-ink grid grid-cols-1 md:grid-cols-12 gap-x-6">
+          <span className="md:col-span-2 label">Have questions?</span>
+          <p className="md:col-span-7 text-lg">
             <a
               href="https://calendar.app.google/hbi5hCjnYi6uFcBW7"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:underline"
+              className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors"
             >
               Book a call
             </a>
             {' '}or{' '}
-            <a href="mailto:patrick.ortell@arus.io" className="text-white hover:underline">
+            <a href="mailto:patrick.ortell@arus.io" className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">
               email me
             </a>
             .
@@ -112,10 +114,10 @@ function formatContent(content: string): string {
       // Skip separator row (row[1] with dashes)
       const bodyRows = rows.slice(2);
 
-      const thead = `<thead><tr>${headerCells.map(c => `<th class="px-4 py-3 text-left text-sm font-semibold text-white border-b border-white/20">${c}</th>`).join('')}</tr></thead>`;
+      const thead = `<thead><tr>${headerCells.map(c => `<th class="px-3 py-2 text-left text-sm font-semibold border-b-2 border-ink">${c}</th>`).join('')}</tr></thead>`;
       const tbody = bodyRows.map(row => {
         const cells = parseRow(row);
-        return `<tr>${cells.map(c => `<td class="px-4 py-3 text-sm text-white/60 border-b border-white/10">${c}</td>`).join('')}</tr>`;
+        return `<tr>${cells.map(c => `<td class="px-3 py-2 text-sm border-b border-ink/30 align-top">${c}</td>`).join('')}</tr>`;
       }).join('');
 
       return `<div class="overflow-x-auto my-6"><table class="w-full border-collapse">${thead}<tbody>${tbody}</tbody></table></div>`;
@@ -123,19 +125,19 @@ function formatContent(content: string): string {
   );
 
   return content
-    .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold text-white mt-10 mb-4">$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold text-white mt-12 mb-6">$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-black text-white mt-12 mb-6">$1</h1>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
+    .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold tracking-[-0.01em] mt-10 mb-3">$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2 class="text-3xl font-black tracking-[-0.03em] leading-tight mt-14 mb-5 pt-4 border-t border-ink">$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-black tracking-[-0.03em] mt-12 mb-6">$1</h1>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-white/5 border border-white/10 p-4 rounded overflow-x-auto my-6 font-mono text-sm text-white/70"><code>$2</code></pre>')
-    .replace(/`([^`]+)`/g, '<code class="bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono text-white/80">$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-white underline hover:no-underline">$1</a>')
-    .replace(/^- (.*$)/gim, '<li class="text-white/60">$1</li>')
-    .replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-6 my-6 space-y-2">$&</ul>')
-    .replace(/\n\n/g, '</p><p class="text-lg text-white/60 leading-relaxed my-6">')
+    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-ink text-paper p-4 overflow-x-auto my-8 font-mono text-sm leading-relaxed"><code>$2</code></pre>')
+    .replace(/`([^`]+)`/g, '<code class="bg-ink/10 px-1 py-0.5 text-[15px] font-mono">$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="font-medium underline underline-offset-[3px] decoration-1 hover:decoration-2">$1</a>')
+    .replace(/^- (.*$)/gim, '<li>$1</li>')
+    .replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-6 my-6 space-y-1.5 marker:text-ink">$&</ul>')
+    .replace(/\n\n/g, '</p><p class="my-5">')
     .replace(/^(?!<[huplo\d])(.*)/gm, (_match, p1) => {
       if (!p1.trim() || p1.startsWith('<')) return p1;
-      return `<p class="text-lg text-white/60 leading-relaxed my-6">${p1}</p>`;
+      return `<p class="my-5">${p1}</p>`;
     });
 }

@@ -2,35 +2,26 @@ import type { ReactNode } from 'react';
 
 interface SectionProps {
   id?: string;
-  /** Small mono label shown in the left rail on desktop. */
+  /** Two-digit serial, e.g. "01". */
+  n: string;
   label: string;
-  /** Optional large heading rendered above the content. */
-  title?: ReactNode;
   children: ReactNode;
   className?: string;
 }
 
 /**
- * Two-column editorial section: a narrow mono label rail on the left,
- * content on the right. Stacks on mobile.
+ * Poster section: a 2px rule, a big serial number and mono label in the
+ * left two columns, content in the remaining ten. Stacks on mobile.
  */
-export default function Section({ id, label, title, children, className = '' }: SectionProps) {
+export default function Section({ id, n, label, children, className = '' }: SectionProps) {
   return (
-    <section id={id} className={`border-t border-rule ${className}`}>
-      <div className="mx-auto max-w-6xl px-6 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-12 gap-x-10 gap-y-8">
-        <div className="md:col-span-3">
-          <div className="md:sticky md:top-28 font-mono text-xs uppercase tracking-[0.2em] text-faint">
-            {label}
-          </div>
+    <section id={id} className={`border-t-2 border-ink ${className}`}>
+      <div className="mx-auto max-w-site px-5 md:px-10 pt-5 pb-14 md:pt-6 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6">
+        <div className="md:col-span-2 flex md:block items-baseline gap-4">
+          <span className="block font-black text-5xl md:text-6xl leading-[0.9] tracking-[-0.04em]">{n}</span>
+          <span className="label block md:mt-3">{label}</span>
         </div>
-        <div className="md:col-span-9">
-          {title && (
-            <h2 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight text-paper mb-10">
-              {title}
-            </h2>
-          )}
-          {children}
-        </div>
+        <div className="md:col-span-10">{children}</div>
       </div>
     </section>
   );
