@@ -2,12 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* warm near-black, not pure black */
+  --ink: #0e0d0b;
+  --paper: #f3efe6;
+  --muted: rgba(243, 239, 230, 0.62);
+  --faint: rgba(243, 239, 230, 0.38);
+  --rule: rgba(243, 239, 230, 0.12);
+  --accent: #FFE500;
+}
+
 body {
-  @apply bg-[#0a0a0a] text-white antialiased;
+  background: var(--ink);
+  color: var(--paper);
+  @apply antialiased;
 }
 
 ::selection {
-  @apply bg-white text-black;
+  background: var(--accent);
+  color: var(--ink);
 }
 
 /* Minimal scrollbar */
@@ -15,8 +28,9 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-[#0a0a0a];
+  background: var(--ink);
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded;
+  background: var(--rule);
+  border-radius: 3px;
 }
