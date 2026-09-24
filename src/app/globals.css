@@ -2,21 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --yellow: #FDE102;
+  --ink: #111111;
+}
+
+html {
+  background: var(--yellow);
+}
+
 body {
-  @apply bg-[#0a0a0a] text-white antialiased;
+  background: var(--yellow);
+  color: var(--ink);
+  @apply antialiased;
 }
 
 ::selection {
-  @apply bg-white text-black;
+  background: var(--ink);
+  color: var(--yellow);
 }
 
-/* Minimal scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-[#0a0a0a];
+  background: var(--yellow);
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded;
+  background: var(--ink);
+}
+
+@layer utilities {
+  .label {
+    @apply font-mono text-[11px] md:text-xs uppercase tracking-[0.06em];
+  }
 }
