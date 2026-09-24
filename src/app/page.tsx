@@ -22,7 +22,7 @@ export default function Home() {
       {/* Hero */}
       <section className="mx-auto max-w-site px-5 md:px-10 pt-10 md:pt-16 pb-14 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
         <h1 className="md:col-span-8 font-black text-[clamp(64px,19vw,96px)] md:text-[clamp(96px,10.5vw,160px)] leading-[0.86] tracking-[-0.045em] self-end">
-          Patrick<br />Ortell
+          Patric<span className="inline-block origin-bottom-left rotate-[8deg] translate-y-[0.01em]">k</span><br />Ortell
         </h1>
 
         {/* Now */}
