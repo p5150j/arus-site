@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main className="paper text-ink min-h-screen">
+    <main className="bg-yellow text-ink min-h-screen">
       <Header />
 
       {/* Hero */}

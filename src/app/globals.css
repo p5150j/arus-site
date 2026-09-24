@@ -5,7 +5,6 @@
 :root {
   --yellow: #FDE102;
   --ink: #111111;
-  --paper: #F4F1E8;
 }
 
 html {
@@ -16,11 +15,6 @@ body {
   background: var(--yellow);
   color: var(--ink);
   @apply antialiased;
-}
-
-/* Long-read pages set this on <main> */
-.paper {
-  background: var(--paper);
 }
 
 ::selection {

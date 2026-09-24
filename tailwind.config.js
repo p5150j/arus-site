@@ -12,7 +12,6 @@ module.exports = {
       colors: {
         yellow: '#FDE102',
         ink: '#111111',
-        paper: '#F4F1E8',
       },
       maxWidth: {
         site: '1600px',
