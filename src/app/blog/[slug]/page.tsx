@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getPostBySlug, getAllPostSlugs } from '@/lib/posts';
+import { getPostBySlug, getAllPostSlugs, getAllPosts } from '@/lib/posts';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -43,6 +43,13 @@ export default async function PostPage({ params }: PageProps) {
     notFound();
   }
 
+  const all = getAllPosts(); // newest first
+  const idx = all.findIndex((p) => p.slug === slug);
+  const newer = idx > 0 ? all[idx - 1] : null;
+  const older = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : null;
+  const words = post.content.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 220));
+
   return (
     <main className="bg-yellow text-ink min-h-screen">
       <Header />
@@ -53,6 +60,7 @@ export default async function PostPage({ params }: PageProps) {
             <time>
               {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
             </time>
+            <span>{minutes} min read</span>
             {post.tags && post.tags.length > 0 && <span>{post.tags.join(' · ')}</span>}
           </div>
           <div className="md:col-span-9">
@@ -74,23 +82,43 @@ export default async function PostPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
         />
 
-        <footer className="md:col-span-12 mt-16 pt-4 border-t-2 border-ink grid grid-cols-1 md:grid-cols-12 gap-x-6">
-          <span className="md:col-span-2 label">Have questions?</span>
-          <p className="md:col-span-7 text-lg">
-            <a
-              href="https://calendar.app.google/hbi5hCjnYi6uFcBW7"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors"
-            >
-              Book a call
-            </a>
-            {' '}or{' '}
-            <a href="mailto:patrick.ortell@arus.io" className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">
-              email me
-            </a>
-            .
-          </p>
+        <footer className="md:col-span-12 mt-16 border-t-2 border-ink">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-x-6 pt-4 pb-10">
+            <span className="md:col-span-2 label">Have questions?</span>
+            <p className="md:col-span-7 text-lg">
+              <a
+                href="https://calendar.app.google/hbi5hCjnYi6uFcBW7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors"
+              >
+                Book a call
+              </a>
+              {' '}or{' '}
+              <a href="mailto:patrick.ortell@arus.io" className="font-semibold border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">
+                email me
+              </a>
+              .
+            </p>
+          </div>
+
+          <nav className="grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-6 border-t border-ink pt-4" aria-label="More writing">
+            <span className="md:col-span-2 label">More writing</span>
+            <div className="md:col-span-10 grid md:grid-cols-2 gap-x-6 gap-y-6">
+              {older ? (
+                <Link href={`/blog/${older.slug}`} className="group">
+                  <span className="label block mb-2">← Older</span>
+                  <span className="block text-2xl font-bold leading-tight tracking-[-0.02em] group-hover:underline underline-offset-4">{older.title}</span>
+                </Link>
+              ) : <span />}
+              {newer ? (
+                <Link href={`/blog/${newer.slug}`} className="group md:text-right">
+                  <span className="label block mb-2">Newer →</span>
+                  <span className="block text-2xl font-bold leading-tight tracking-[-0.02em] group-hover:underline underline-offset-4">{newer.title}</span>
+                </Link>
+              ) : <span />}
+            </div>
+          </nav>
         </footer>
       </article>
 
@@ -133,8 +161,12 @@ function formatContent(content: string): string {
     .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-ink text-yellow p-4 overflow-x-auto my-8 font-mono text-sm leading-relaxed"><code>$2</code></pre>')
     .replace(/`([^`]+)`/g, '<code class="bg-ink/10 px-1 py-0.5 text-[15px] font-mono">$1</code>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="font-medium underline underline-offset-[3px] decoration-1 hover:decoration-2">$1</a>')
+    .replace(/^---$/gm, '<hr class="border-0 border-t border-ink my-10" />')
+    .replace(/^\d+\. (.*$)/gim, '<oli>$1</oli>')
+    .replace(/(<oli>.*<\/oli>\n?)+/g, '<ol class="list-decimal pl-6 my-6 space-y-1.5 marker:font-mono marker:text-[15px]">$&</ol>')
     .replace(/^- (.*$)/gim, '<li>$1</li>')
     .replace(/(<li.*<\/li>\n?)+/g, '<ul class="list-disc pl-6 my-6 space-y-1.5 marker:text-ink">$&</ul>')
+    .replace(/<(\/?)oli>/g, '<$1li>')
     .replace(/\n\n/g, '</p><p class="my-5">')
     .replace(/^(?!<[huplo\d])(.*)/gm, (_match, p1) => {
       if (!p1.trim() || p1.startsWith('<')) return p1;

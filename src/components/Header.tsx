@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 /**
- * Sticky top bar. Always yellow, so it stays a yellow band over paper
- * pages too. Twelve-column grid matches the sections below it.
+ * Sticky top bar. Twelve-column grid matches the sections below it.
  */
 export default function Header() {
   return (
