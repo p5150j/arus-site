@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 /**
- * Static top bar. Always yellow, so paper pages still open under the
- * same band. Twelve-column grid matches the sections below it.
+ * Sticky top bar. Always yellow, so it stays a yellow band over paper
+ * pages too. Twelve-column grid matches the sections below it.
  */
 export default function Header() {
   return (
-    <header className="bg-yellow text-ink border-t-2 border-b border-ink">
+    <header className="sticky top-0 z-50 bg-yellow text-ink border-t-2 border-b border-ink">
       <div className="mx-auto max-w-site px-5 md:px-10 py-3 grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-1 label">
         <Link href="/" className="md:col-span-3 hover:underline underline-offset-4">Patrick Ortell</Link>
         <span className="hidden md:block md:col-span-4">Fort Collins, Colorado · remote, like always</span>
