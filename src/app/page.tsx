@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Contact from '@/components/Contact';
@@ -174,35 +173,24 @@ export default function Home() {
 
       {/* 06 About */}
       <Section n="06" label="About">
-        <div className="grid grid-cols-1 md:grid-cols-10 gap-x-6 gap-y-8">
-          <div className="md:col-span-2">
-            <Image
-              src="/patrick-v3.jpg"
-              alt="Patrick Ortell"
-              width={480}
-              height={640}
-              className="cutout block w-44 md:w-full max-w-[260px] aspect-[3/4] object-cover object-[50%_35%]"
-            />
-          </div>
-          <div className="md:col-span-8 grid md:grid-cols-2 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em]">
-            <p>
-              I&apos;m Patrick. I&apos;ve been CTO, VP Engineering, CPO, Technical Product Owner.
-              Built teams, shipped products, been through three acquisitions.
-              Written Rust for blockchain protocols, Python for ML pipelines,
-              and mass amounts of JavaScript.
-            </p>
-            <p>
-              Before all that, I was an intern at Mozilla. Before that, I was tutoring
-              GED prep to homeless teenagers at a drop-in center in Denver. I still
-              mentor at youth hackathons — 9 years now.
-            </p>
-            <p>
-              I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
-            </p>
-            <p className="font-mono text-[15px] self-end">
-              Fort Collins, Colorado. Working remote, like always.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em]">
+          <p>
+            I&apos;m Patrick. I&apos;ve been CTO, VP Engineering, CPO, Technical Product Owner.
+            Built teams, shipped products, been through three acquisitions.
+            Written Rust for blockchain protocols, Python for ML pipelines,
+            and mass amounts of JavaScript.
+          </p>
+          <p>
+            Before all that, I was an intern at Mozilla. Before that, I was tutoring
+            GED prep to homeless teenagers at a drop-in center in Denver. I still
+            mentor at youth hackathons — 9 years now.
+          </p>
+          <p>
+            I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
+          </p>
+          <p className="font-mono text-[15px] self-end">
+            Fort Collins, Colorado. Working remote, like always.
+          </p>
         </div>
       </Section>
 
