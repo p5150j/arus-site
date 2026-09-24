@@ -22,40 +22,12 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mx-auto max-w-site px-5 md:px-10 pt-10 md:pt-16 pb-14 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-10">
-        <h1 className="md:col-span-8 md:row-start-1 font-black text-[clamp(64px,19vw,96px)] md:text-[clamp(96px,10.5vw,160px)] leading-[0.86] tracking-[-0.045em] self-end">
+        <h1 className="md:col-span-8 font-black text-[clamp(64px,19vw,96px)] md:text-[clamp(96px,10.5vw,160px)] leading-[0.86] tracking-[-0.045em] self-end">
           Patrick<br />Ortell
         </h1>
 
-        <div className="md:col-span-4 md:row-start-1 md:row-span-2 md:self-start">
-          <Image
-            src="/patrick-v3.jpg"
-            alt="Patrick Ortell"
-            width={720}
-            height={900}
-            priority
-            className="block w-full aspect-[4/5] object-cover object-top"
-          />
-        </div>
-
-        <div className="md:col-span-8 md:row-start-2 grid md:grid-cols-2 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em] mt-2 md:mt-10">
-          <p>
-            <strong className="font-semibold">I build and lead the engineering teams that ship AI.</strong>{' '}
-            14 years building software. Three exits. Teams scaled from two to 80+. Products from $0 to $50M ARR.
-          </p>
-          <p>
-            VP Engineering, CTO, Technical AI Product Manager. Currently architecting
-            enterprise AI infrastructure at myCOI — in-house LLM fine-tuning, GraphRAG,
-            and model serving that never lets data leave the building.
-          </p>
-          <div className="md:col-span-2 flex flex-wrap gap-x-7 gap-y-2 text-lg font-semibold mt-2">
-            <a href="/resume" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Full resume</a>
-            <a href="#contact" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Work with me</a>
-            <a href="mailto:patrick.ortell@arus.io" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">patrick.ortell@arus.io</a>
-          </div>
-        </div>
-
         {/* Now */}
-        <ul className="md:col-span-4 md:row-start-3 md:col-start-9 text-[15px] leading-snug mt-2 md:-mt-6">
+        <ul className="md:col-span-4 text-[15px] leading-snug self-end">
           <li className="label border-t border-ink pt-2 pb-2 flex justify-between">
             <span>Now</span><span>September 2026</span>
           </li>
@@ -64,6 +36,23 @@ export default function Home() {
           <li className="border-b border-ink/40 py-1.5">Mentoring at Techstars, fourth year.</li>
           <li className="border-b border-ink/40 py-1.5 font-semibold">Taking conversations about senior AI leadership roles and new advisory work.</li>
         </ul>
+
+        <div className="md:col-span-12 grid md:grid-cols-12 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em]">
+          <p className="md:col-span-4">
+            <strong className="font-semibold">I build and lead the engineering teams that ship AI.</strong>{' '}
+            14 years building software. Three exits. Teams scaled from two to 80+. Products from $0 to $50M ARR.
+          </p>
+          <p className="md:col-span-4">
+            VP Engineering, CTO, Technical AI Product Manager. Currently architecting
+            enterprise AI infrastructure at myCOI — in-house LLM fine-tuning, GraphRAG,
+            and model serving that never lets data leave the building.
+          </p>
+          <div className="md:col-span-4 flex flex-wrap md:flex-col md:items-start gap-x-7 gap-y-3 text-lg font-semibold md:pl-6 md:border-l md:border-ink">
+            <a href="/resume" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Full resume</a>
+            <a href="#contact" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Work with me</a>
+            <a href="mailto:patrick.ortell@arus.io" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">patrick.ortell@arus.io</a>
+          </div>
+        </div>
       </section>
 
       {/* 01 Recently */}
@@ -185,24 +174,35 @@ export default function Home() {
 
       {/* 06 About */}
       <Section n="06" label="About">
-        <div className="grid md:grid-cols-2 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em]">
-          <p>
-            I&apos;m Patrick. I&apos;ve been CTO, VP Engineering, CPO, Technical Product Owner.
-            Built teams, shipped products, been through three acquisitions.
-            Written Rust for blockchain protocols, Python for ML pipelines,
-            and mass amounts of JavaScript.
-          </p>
-          <p>
-            Before all that, I was an intern at Mozilla. Before that, I was tutoring
-            GED prep to homeless teenagers at a drop-in center in Denver. I still
-            mentor at youth hackathons — 9 years now.
-          </p>
-          <p>
-            I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
-          </p>
-          <p className="font-mono text-[15px] self-end">
-            Fort Collins, Colorado. Working remote, like always.
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-x-6 gap-y-8">
+          <div className="md:col-span-2">
+            <Image
+              src="/patrick-v3.jpg"
+              alt="Patrick Ortell"
+              width={480}
+              height={640}
+              className="cutout block w-44 md:w-full max-w-[260px] aspect-[3/4] object-cover object-[50%_35%]"
+            />
+          </div>
+          <div className="md:col-span-8 grid md:grid-cols-2 gap-x-6 gap-y-5 text-xl md:text-[21px] leading-snug tracking-[-0.01em]">
+            <p>
+              I&apos;m Patrick. I&apos;ve been CTO, VP Engineering, CPO, Technical Product Owner.
+              Built teams, shipped products, been through three acquisitions.
+              Written Rust for blockchain protocols, Python for ML pipelines,
+              and mass amounts of JavaScript.
+            </p>
+            <p>
+              Before all that, I was an intern at Mozilla. Before that, I was tutoring
+              GED prep to homeless teenagers at a drop-in center in Denver. I still
+              mentor at youth hackathons — 9 years now.
+            </p>
+            <p>
+              I&apos;m a <a href="https://www.techstars.com/" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">Techstars</a> All Star Mentor (three years running). Off the clock I do pro bono AI/ML work for nonprofits at <a href="https://impact.arus.io" target="_blank" rel="noopener noreferrer" className="border-b-2 border-ink hover:bg-ink hover:text-yellow transition-colors">arus impact</a> — Bellingcat, Reporters Without Borders, CyberPeace Institute.
+            </p>
+            <p className="font-mono text-[15px] self-end">
+              Fort Collins, Colorado. Working remote, like always.
+            </p>
+          </div>
         </div>
       </Section>
 

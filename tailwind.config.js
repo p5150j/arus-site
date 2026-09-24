@@ -10,7 +10,7 @@ module.exports = {
         'mono': ['var(--font-geist-mono)', 'monospace'],
       },
       colors: {
-        yellow: '#FFE500',
+        yellow: '#FDE102',
         ink: '#111111',
         paper: '#F4F1E8',
       },
