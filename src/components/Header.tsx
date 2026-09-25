@@ -13,7 +13,6 @@ export default function Header() {
         <nav className="col-span-1 md:col-span-2 flex justify-end gap-3 md:gap-4">
           <Link href="/blog" className="hover:underline underline-offset-4">Writing</Link>
           <Link href="/resume" className="hover:underline underline-offset-4">Resume</Link>
-          <a href="https://impact.arus.io/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">Impact</a>
           <a href="https://travel.arus.io/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">Travel</a>
         </nav>
       </div>
