@@ -79,3 +79,13 @@ export function getAllPostSlugs(): string[] {
     .filter((fileName) => fileName.endsWith('.mdx') || fileName.endsWith('.md'))
     .map((fileName) => fileName.replace(/\.mdx?$/, ''));
 }
+
+/** Format a YYYY-MM-DD frontmatter date without timezone drift. */
+export function formatDate(date: string, style: 'short' | 'long' = 'short'): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: style === 'long' ? 'long' : 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+}

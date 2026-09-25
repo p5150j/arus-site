@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Section from '@/components/Section';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, formatDate } from '@/lib/posts';
 import { recentRoles, stats, testimonials } from '@/lib/site-data';
 
 const relationLabel: Record<string, string> = {
@@ -137,7 +137,7 @@ export default function Home() {
               className={`group grid grid-cols-1 md:grid-cols-10 gap-x-6 gap-y-1 py-4 ${i > 0 ? 'border-t border-ink' : 'pt-0'}`}
             >
               <time className="md:col-span-2 font-mono text-[13px] self-center">
-                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                {formatDate(post.date)}
               </time>
               <span className="md:col-span-6">
                 <span className="block text-xl md:text-[22px] leading-tight tracking-[-0.015em] font-semibold group-hover:underline underline-offset-4">{post.title}</span>
