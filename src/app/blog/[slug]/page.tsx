@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getPostBySlug, getAllPostSlugs, getAllPosts } from '@/lib/posts';
+import { getPostBySlug, getAllPostSlugs, getAllPosts, formatDate } from '@/lib/posts';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -58,7 +58,7 @@ export default async function PostPage({ params }: PageProps) {
         <header className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-x-6 gap-y-4 pb-8 mb-10 border-b-2 border-ink">
           <div className="md:col-span-2 font-mono text-[13px] flex md:flex-col gap-x-4 gap-y-1">
             <time>
-              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              {formatDate(post.date)}
             </time>
             <span>{minutes} min read</span>
             {post.tags && post.tags.length > 0 && <span>{post.tags.join(' · ')}</span>}
@@ -127,7 +127,20 @@ export default async function PostPage({ params }: PageProps) {
   );
 }
 
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function formatContent(content: string): string {
+  // Lift fenced code out first so later passes never touch its lines.
+  const codeBlocks: string[] = [];
+  content = content.replace(/```(\w+)?\n([\s\S]*?)```/g, (_m, _lang, code) => {
+    codeBlocks.push(
+      `<pre class="bg-ink text-yellow p-4 overflow-x-auto my-8 font-mono text-sm leading-relaxed"><code>${escapeHtml(code.replace(/\n$/, ''))}</code></pre>`
+    );
+    return `<!--CODE${codeBlocks.length - 1}-->`;
+  });
+
   // Process tables before other transformations
   content = content.replace(
     /((?:^\|.+\|$\n?)+)/gm,
@@ -158,7 +171,6 @@ function formatContent(content: string): string {
     .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-black tracking-[-0.03em] mt-12 mb-6">$1</h1>')
     .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-ink text-yellow p-4 overflow-x-auto my-8 font-mono text-sm leading-relaxed"><code>$2</code></pre>')
     .replace(/`([^`]+)`/g, '<code class="bg-ink/10 px-1 py-0.5 text-[15px] font-mono">$1</code>')
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="font-medium underline underline-offset-[3px] decoration-1 hover:decoration-2">$1</a>')
     .replace(/^---$/gm, '<hr class="border-0 border-t border-ink my-10" />')
@@ -171,5 +183,6 @@ function formatContent(content: string): string {
     .replace(/^(?!<[huplo\d])(.*)/gm, (_match, p1) => {
       if (!p1.trim() || p1.startsWith('<')) return p1;
       return `<p class="my-5">${p1}</p>`;
-    });
+    })
+    .replace(/<!--CODE(\d+)-->/g, (_m, i) => codeBlocks[Number(i)]);
 }

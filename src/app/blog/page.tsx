@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, formatDate } from '@/lib/posts';
 
 export const metadata: Metadata = {
   title: 'Writing',
@@ -37,7 +37,7 @@ export default function BlogPage() {
                   className={`group grid grid-cols-1 md:grid-cols-10 gap-x-6 gap-y-2 py-6 ${i > 0 ? 'border-t border-ink' : 'pt-1'}`}
                 >
                   <time className="md:col-span-2 font-mono text-[13px] pt-1">
-                    {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    {formatDate(post.date, 'long')}
                   </time>
                   <span className="md:col-span-6">
                     <span className="block font-bold text-3xl md:text-4xl leading-[1.02] tracking-[-0.03em] group-hover:underline underline-offset-[6px] decoration-2">{post.title}</span>
